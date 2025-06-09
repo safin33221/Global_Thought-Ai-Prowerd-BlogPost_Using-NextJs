@@ -228,9 +228,18 @@ export function NavigationMenuDemo() {
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <div>
-                        <Link href="/login" className="text-sm font-medium text-blue-600 hover:underline">Login</Link>
-                        <span className="mx-2">|</span>
-                        <Link href="/register" className="text-sm font-medium text-blue-600 hover:underline">Register</Link>
+                        {
+                            session.status === "authenticated" ? (
+                                <div>
+                                    <h1>{session?.data?.user?.name}</h1>
+                                </div>) : (
+                                <div>
+                                    <Link href="/login" className="text-sm font-medium text-blue-600 hover:underline">Login</Link>
+                                    <span className="mx-2">|</span>
+                                    <Link href="/register" className="text-sm font-medium text-blue-600 hover:underline">Register</Link>
+                                </div>)
+                        }
+
                     </div>
                 </div>
             </div>
