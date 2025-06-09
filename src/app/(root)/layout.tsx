@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import ".././globals.css";
 import { ThemeProvider } from "../components/theme-provider";
 import { NavigationMenuDemo } from "../components/Navbar";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -40,6 +41,8 @@ export default function RootLayout({
           <NavigationMenuDemo/>
 
           {children}
+
+          <Toaster/>
         </ThemeProvider>
       </body>
     </html>
