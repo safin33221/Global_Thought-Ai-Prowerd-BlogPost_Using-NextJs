@@ -3,8 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import SignInFrom from "./components/SignInFrom";
-
+import SignUpForm from "./components/SignUpForm";
 
 
 
@@ -45,7 +44,7 @@ export default function LoginPage() {
             </div>
 
             {/* Right Side - Login Form */}
-           <SignInFrom/>
+           <SignUpForm/>
         </motion.div>
     );
 }
