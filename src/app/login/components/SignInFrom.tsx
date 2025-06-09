@@ -34,6 +34,7 @@ const SignInFrom = () => {
                 callbackUrl: "/",
                 redirect: false
             });
+            console.log(response);
             // Check if the sign-in was successful
             if (!response) {
                 toast.error("Failed to sign in. Please check your credentials and try again.");
@@ -45,7 +46,7 @@ const SignInFrom = () => {
             } else {
                 toast.error("Invalid credentials. Please try again.");
 
-                
+
 
             }
             // Optionally, you can redirect the user after successful sign-in

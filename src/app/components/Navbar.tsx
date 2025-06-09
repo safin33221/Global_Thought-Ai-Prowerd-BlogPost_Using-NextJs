@@ -68,8 +68,11 @@ export function NavigationMenuDemo() {
     const session = useSession()
     console.log("session", session);
     return (
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <h1 className="text-xl font-bold">ThinkPost</h1>
+        <div className="container mx-auto px-4 py-2 flex items-center justify-between">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Global Thought
+            </h1>
+
 
             {/* Mobile Toggle */}
             <div className="md:hidden flex items-center gap-2 ">
@@ -113,15 +116,15 @@ export function NavigationMenuDemo() {
                                                 className="flex h-full w-full flex-col justify-end rounded-md p-6 bg-muted no-underline select-none focus:shadow-md"
                                                 href="/"
                                             >
-                                                <div className="text-lg font-medium">ThinkPost</div>
+                                                <div className="text-lg font-medium">Global Thought</div>
                                                 <p className="text-muted-foreground text-sm leading-tight">
                                                     AI-powered blogging made simple, fast, and optimized for reach.
                                                 </p>
                                             </Link>
                                         </NavigationMenuLink>
                                     </li>
-                                    <ListItem href="/about" title="About ThinkPost">
-                                        Learn how ThinkPost helps you create and manage blogs effortlessly with AI.
+                                    <ListItem href="/about" title="About Global Thought">
+                                        Learn how Global Thought helps you create and manage blogs effortlessly with AI.
                                     </ListItem>
                                     <ListItem href="/get-started" title="Get Started">
                                         Start writing your first AI-generated blog post in just a few steps.
@@ -163,7 +166,7 @@ export function NavigationMenuDemo() {
                                         </Link>
                                         <Link href="/guides">
                                             <div className="font-medium">Guides</div>
-                                            <p className="text-muted-foreground">Step-by-step tutorials on ThinkPost.</p>
+                                            <p className="text-muted-foreground">Step-by-step tutorials on Global Thought.</p>
                                         </Link>
                                         <Link href="/blog">
                                             <div className="font-medium">Blog</div>
