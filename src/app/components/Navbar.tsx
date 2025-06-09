@@ -21,6 +21,7 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { useSession } from "next-auth/react"
 
 const components = [
     {
@@ -64,6 +65,8 @@ export function NavigationMenuDemo() {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
     const { setTheme } = useTheme()
+    const session = useSession()
+    console.log(session);
     return (
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
             <h1 className="text-xl font-bold">ThinkPost</h1>
@@ -71,26 +74,26 @@ export function NavigationMenuDemo() {
             {/* Mobile Toggle */}
             <div className="md:hidden flex items-center gap-2 ">
                 <div className=" ">
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" size="icon">
-                            <Sun className="h-[1.2rem]  w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-                            <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-                            <span className="sr-only">Toggle theme</span>
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => setTheme("light")}>
-                            Light
-                        </DropdownMenuItem>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline" size="icon">
+                                <Sun className="h-[1.2rem]  w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+                                <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+                                <span className="sr-only">Toggle theme</span>
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => setTheme("light")}>
+                                Light
+                            </DropdownMenuItem>
 
-                        <DropdownMenuItem onClick={() => setTheme("system")}>
-                            dark
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-                
-            </div>
+                            <DropdownMenuItem onClick={() => setTheme("system")}>
+                                dark
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
+                </div>
                 <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                     {mobileMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
                 </button>
@@ -231,7 +234,7 @@ export function NavigationMenuDemo() {
                     </div>
                 </div>
             </div>
-            
+
             {/* Mobile Menu Content */}
             {mobileMenuOpen && (
                 <div className="absolute top-16 left-0 right-0 text-black bg-white  z-50 flex flex-col p-4 shadow-md space-y-4 md:hidden">

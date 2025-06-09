@@ -4,6 +4,7 @@ import ".././globals.css";
 import { ThemeProvider } from "../components/theme-provider";
 import { NavigationMenuDemo } from "../components/Navbar";
 import { Toaster } from "react-hot-toast";
+import NextAuthProvider from "@/Providers/NextAuthProvider";
 
 
 
@@ -32,18 +33,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NavigationMenuDemo/>
+        <NextAuthProvider>
 
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NavigationMenuDemo />
 
-          <Toaster/>
-        </ThemeProvider>
+            {children}
+
+            <Toaster />
+          </ThemeProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );
