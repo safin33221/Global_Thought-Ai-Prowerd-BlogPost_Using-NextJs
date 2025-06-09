@@ -1,9 +1,10 @@
 "use client";
-import BlogPostHero from "./components/BlogPostHero";
 
-import FeatureBlog from "./components/FeatureBlog";
 
 import React from 'react';
+import BlogPostHero from '../components/BlogPostHero';
+import FeatureBlog from '../components/FeatureBlog';
+
 
 const page = () => {
   return (
@@ -22,7 +23,7 @@ const page = () => {
         tags={["AI", "Content", "Blogging"]}
       />
 
-      <FeatureBlog  />
+      <FeatureBlog/>
 
     </div>
   );
