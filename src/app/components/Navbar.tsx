@@ -21,7 +21,7 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 
 const components = [
     {
@@ -230,8 +230,11 @@ export function NavigationMenuDemo() {
                     <div>
                         {
                             session.status === "authenticated" ? (
-                                <div>
-                                    <h1>{session?.data?.user?.name}</h1>
+                                <div className="flex gap-2 items-center">
+                                    <h1 className="font-bold p-2">{session?.data?.user?.name}</h1>
+                                    <button className="border py-2 px-4 rounded-lg" onClick={() => signOut()}>
+                                        logout
+                                    </button>
                                 </div>) : (
                                 <div>
                                     <Link href="/login" className="text-sm font-medium text-blue-600 hover:underline">Login</Link>
