@@ -4,6 +4,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {
     // Configure one or more authentication providers
+    session: {
+        strategy: "jwt",
+        maxAge: 2 * 24 * 60 * 60, // 2 days
+        updateAge: 24 * 60 * 60,  // refresh once per day
+    },
     providers: [
         CredentialsProvider({
             // The name to display on the sign in form (e.g. "Sign in with...")
@@ -18,9 +23,9 @@ export const authOptions = {
             },
             async authorize(credentials: { email: string; password: string }, req: Request) {
                 const user = await loginUser(credentials)
-                console.log(user);
+
                 // Add logic here to look up the user from the credentials supplied
-  
+
 
                 if (user) {
                     // Any object returned will be saved in `user` property of the JWT

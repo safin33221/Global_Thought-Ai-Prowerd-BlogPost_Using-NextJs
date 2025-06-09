@@ -180,11 +180,11 @@ export function NavigationMenuDemo() {
                         <NavigationMenuItem>
                             <NavigationMenuTrigger>Quick Links</NavigationMenuTrigger>
                             <NavigationMenuContent>
-                                <ul className="grid w-[200px] gap-4">
-                                    <li>
-                                        <Link href="/create">Create Post</Link>
-                                        <Link href="/dashboard">Dashboard</Link>
-                                        <Link href="/categories">Categories</Link>
+                                <ul className="w-[200px] ">
+                                    <li className="flex flex-col gap-2 ">
+                                        <Link className="light:hover:bg-gray-200 p-2" href="/create">Create Post</Link>
+                                        <Link className="light:hover:bg-gray-200 p-2" href="/dashboard">Dashboard</Link>
+                                        <Link className="light:hover:bg-gray-200 p-2" href="/categories">Categories</Link>
                                     </li>
                                 </ul>
                             </NavigationMenuContent>
