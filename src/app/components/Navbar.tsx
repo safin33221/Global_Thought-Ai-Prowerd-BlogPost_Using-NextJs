@@ -66,7 +66,7 @@ export function NavigationMenuDemo() {
 
     const { setTheme } = useTheme()
     const session = useSession()
-    console.log(session);
+    console.log("session", session);
     return (
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
             <h1 className="text-xl font-bold">ThinkPost</h1>
