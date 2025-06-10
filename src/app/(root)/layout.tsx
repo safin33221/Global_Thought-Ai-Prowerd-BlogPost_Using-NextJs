@@ -4,6 +4,7 @@ import ".././globals.css";
 import { ThemeProvider } from "../components/theme-provider";
 import { NavigationMenuDemo } from "../components/Navbar";
 import { Toaster } from "react-hot-toast";
+import NextAuthProvider from "@/Providers/NextAuthProvider";
 
 
 
@@ -18,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ThinkPost",
-  description: "ThinkPost is a platform designed to help you organize your thoughts and ideas effectively. Whether you are brainstorming, planning, or just jotting down notes, ThinkPost provides the tools you need to stay organized and focused.",
+  title: "Global Thought",
+  description: "Global Thought is a platform designed to help you organize your thoughts and ideas effectively. Whether you are brainstorming, planning, or just jotting down notes, Global Thought provides the tools you need to stay organized and focused.",
 };
 
 export default function RootLayout({
@@ -32,18 +33,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NavigationMenuDemo/>
+        <NextAuthProvider>
 
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NavigationMenuDemo />
 
-          <Toaster/>
-        </ThemeProvider>
+            {children}
+
+            <Toaster />
+          </ThemeProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

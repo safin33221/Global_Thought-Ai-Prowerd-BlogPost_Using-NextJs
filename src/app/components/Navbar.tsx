@@ -5,13 +5,6 @@ import Link from "next/link"
 import { MenuIcon, XIcon, CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react"
 import { Moon, Sun } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -21,6 +14,22 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { Button } from "@/components/ui/button"
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { signOut, useSession } from "next-auth/react"
 
 const components = [
     {
@@ -64,33 +73,38 @@ export function NavigationMenuDemo() {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
     const { setTheme } = useTheme()
+    const session = useSession()
+    console.log("session", session);
     return (
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <h1 className="text-xl font-bold">ThinkPost</h1>
+        <div className="container mx-auto px-4 py-2 flex items-center justify-between">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Global Thought
+            </h1>
+
 
             {/* Mobile Toggle */}
             <div className="md:hidden flex items-center gap-2 ">
                 <div className=" ">
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" size="icon">
-                            <Sun className="h-[1.2rem]  w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-                            <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-                            <span className="sr-only">Toggle theme</span>
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => setTheme("light")}>
-                            Light
-                        </DropdownMenuItem>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline" size="icon">
+                                <Sun className="h-[1.2rem]  w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+                                <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+                                <span className="sr-only">Toggle theme</span>
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => setTheme("light")}>
+                                Light
+                            </DropdownMenuItem>
 
-                        <DropdownMenuItem onClick={() => setTheme("system")}>
-                            dark
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-                
-            </div>
+                            <DropdownMenuItem onClick={() => setTheme("system")}>
+                                dark
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
+                </div>
                 <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                     {mobileMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
                 </button>
@@ -110,15 +124,15 @@ export function NavigationMenuDemo() {
                                                 className="flex h-full w-full flex-col justify-end rounded-md p-6 bg-muted no-underline select-none focus:shadow-md"
                                                 href="/"
                                             >
-                                                <div className="text-lg font-medium">ThinkPost</div>
+                                                <div className="text-lg font-medium">Global Thought</div>
                                                 <p className="text-muted-foreground text-sm leading-tight">
                                                     AI-powered blogging made simple, fast, and optimized for reach.
                                                 </p>
                                             </Link>
                                         </NavigationMenuLink>
                                     </li>
-                                    <ListItem href="/about" title="About ThinkPost">
-                                        Learn how ThinkPost helps you create and manage blogs effortlessly with AI.
+                                    <ListItem href="/about" title="About Global Thought">
+                                        Learn how Global Thought helps you create and manage blogs effortlessly with AI.
                                     </ListItem>
                                     <ListItem href="/get-started" title="Get Started">
                                         Start writing your first AI-generated blog post in just a few steps.
@@ -160,7 +174,7 @@ export function NavigationMenuDemo() {
                                         </Link>
                                         <Link href="/guides">
                                             <div className="font-medium">Guides</div>
-                                            <p className="text-muted-foreground">Step-by-step tutorials on ThinkPost.</p>
+                                            <p className="text-muted-foreground">Step-by-step tutorials on Global Thought.</p>
                                         </Link>
                                         <Link href="/blog">
                                             <div className="font-medium">Blog</div>
@@ -171,18 +185,21 @@ export function NavigationMenuDemo() {
                             </NavigationMenuContent>
                         </NavigationMenuItem>
 
-                        <NavigationMenuItem>
-                            <NavigationMenuTrigger>Quick Links</NavigationMenuTrigger>
-                            <NavigationMenuContent>
-                                <ul className="grid w-[200px] gap-4">
-                                    <li>
-                                        <Link href="/create">Create Post</Link>
-                                        <Link href="/dashboard">Dashboard</Link>
-                                        <Link href="/categories">Categories</Link>
-                                    </li>
-                                </ul>
-                            </NavigationMenuContent>
-                        </NavigationMenuItem>
+                        {
+                            session.status === 'authenticated' &&
+                            <NavigationMenuItem>
+                                <NavigationMenuTrigger>Quick Links</NavigationMenuTrigger>
+                                <NavigationMenuContent>
+                                    <ul className="w-[200px] ">
+                                        <li className="flex flex-col gap-2 ">
+                                            <Link className="light:hover:bg-gray-200 p-2" href="/blog/create">Create Post</Link>
+                                            <Link className="light:hover:bg-gray-200 p-2" href="/dashboard">Dashboard</Link>
+                                            <Link className="light:hover:bg-gray-200 p-2" href="/categories">Categories</Link>
+                                        </li>
+                                    </ul>
+                                </NavigationMenuContent>
+                            </NavigationMenuItem>
+                        }
 
                         <NavigationMenuItem>
                             <NavigationMenuTrigger>Status</NavigationMenuTrigger>
@@ -225,13 +242,78 @@ export function NavigationMenuDemo() {
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <div>
-                        <Link href="/login" className="text-sm font-medium text-blue-600 hover:underline">Login</Link>
-                        <span className="mx-2">|</span>
-                        <Link href="/register" className="text-sm font-medium text-blue-600 hover:underline">Register</Link>
+                        {
+                            session.status === "authenticated" ? (
+                                <div className="flex gap-2 items-center">
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button variant="outline">Open</Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent className="w-56" align="start">
+                                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                            <DropdownMenuGroup>
+                                                <DropdownMenuItem>
+                                                    Profile
+                                                    <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem>
+                                                    Billing
+                                                    <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem>
+                                                    Settings
+                                                    <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem>
+                                                    Keyboard shortcuts
+                                                    <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+                                                </DropdownMenuItem>
+                                            </DropdownMenuGroup>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuGroup>
+                                                <DropdownMenuItem>Team</DropdownMenuItem>
+                                                <DropdownMenuSub>
+                                                    <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
+                                                    <DropdownMenuPortal>
+                                                        <DropdownMenuSubContent>
+                                                            <DropdownMenuItem>Email</DropdownMenuItem>
+                                                            <DropdownMenuItem>Message</DropdownMenuItem>
+                                                            <DropdownMenuSeparator />
+                                                            <DropdownMenuItem>More...</DropdownMenuItem>
+                                                        </DropdownMenuSubContent>
+                                                    </DropdownMenuPortal>
+                                                </DropdownMenuSub>
+                                                <DropdownMenuItem>
+                                                    New Team
+                                                    <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
+                                                </DropdownMenuItem>
+                                            </DropdownMenuGroup>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem>GitHub</DropdownMenuItem>
+                                            <DropdownMenuItem>Support</DropdownMenuItem>
+                                            <DropdownMenuItem disabled>API</DropdownMenuItem>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem onClick={() => signOut()}>
+                                                Log out
+                                                <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                    <button className="border py-2 px-4 rounded-lg" >
+                                        logout
+                                    </button>
+                                </div>) : (
+                                <div>
+                                    <Link href="/login" className="text-sm font-medium text-blue-600 hover:underline">Login</Link>
+                                    <span className="mx-2">|</span>
+                                    <Link href="/register" className="text-sm font-medium text-blue-600 hover:underline">Register</Link>
+                                </div>)
+                        }
+
                     </div>
                 </div>
             </div>
-            
+
             {/* Mobile Menu Content */}
             {mobileMenuOpen && (
                 <div className="absolute top-16 left-0 right-0 text-black bg-white  z-50 flex flex-col p-4 shadow-md space-y-4 md:hidden">

@@ -31,9 +31,9 @@ export default function LoginPage() {
                 <div className="absolute inset-0 bg-black opacity-80"></div>
 
                 <div className="absolute inset-0 p-12 flex flex-col justify-center text-white">
-                    <h1 className="text-6xl font-bold mb-4">ThinkPost</h1>
+                    <h1 className="text-6xl font-bold mb-4">Global Thought</h1>
                     <p className="text-lg max-w-md">
-                        Welcome to ThinkPost – your platform to share ideas, thoughts, and inspirations.
+                        Welcome to Global Thought – your platform to share ideas, thoughts, and inspirations.
                     </p>
                     <p className="mt-4 max-w-md text-sm text-gray-300">
                         Post your ideas, follow your favorite writers, and stay updated with daily insights.

@@ -12,7 +12,7 @@ const page = () => {
      ">
       <BlogPostHero
         title="Unlocking AI's Potential in Content Creation"
-        excerpt="ThinkPost uses cutting-edge AI to help you write faster, smarter, and more creatively than ever before."
+        excerpt="Global Thought uses cutting-edge AI to help you write faster, smarter, and more creatively than ever before."
         coverUrl="/images/heroBackground.jpg"
         author={{
           name: "Safin chowdhury",

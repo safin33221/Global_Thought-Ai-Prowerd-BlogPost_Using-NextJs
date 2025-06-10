@@ -3,7 +3,9 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import toast from "react-hot-toast";
+
+import registerUser from '@/app/actions/auth/register';
+import toast from 'react-hot-toast';
 const schema = z.object({
     name: z.string(),
     email: z.string().email({ message: "Invalid email address" }),
@@ -19,9 +21,16 @@ const SignUpForm = () => {
         formState: { errors },
     } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-    const onSubmit = (data: FormData) => {
-        toast.success("Logged in successfully!");
-        console.log(data);
+    const onSubmit = async (data: FormData) => {
+        const result = await registerUser(data)
+        console.log(result);
+        if (result?.acknowledged === true) {
+            toast.success('user register success')
+        } else {
+            toast.error(result?.message)
+        }
+
+
     };
     return (
         <div className="flex items-center justify-center p-8 bg-white">

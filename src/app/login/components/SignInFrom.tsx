@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 const schema = z.object({
     email: z.string().email({ message: "Invalid email address" }),
     password: z.string().min(6, { message: "Minimum 6 characters" }),
@@ -11,15 +13,49 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 const SignInFrom = () => {
+    const router = useRouter()
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-    const onSubmit = (data: FormData) => {
-        toast.success("Logged in successfully!");
-        console.log(data);
+    const onSubmit = async (data: FormData) => {
+        const { email, password } = data
+        try {
+            toast("Signing in...");
+            // Call the signIn function from next-auth
+            // You can pass additional options like redirect URL, etc.
+
+
+            const response = await signIn("credentials", {
+                email,
+                password,
+                callbackUrl: "/",
+                redirect: false
+            });
+            console.log(response);
+            // Check if the sign-in was successful
+            if (!response) {
+                toast.error("Failed to sign in. Please check your credentials and try again.");
+            } else if (response.ok) {
+                router.push("/")
+               
+                toast.success("Successfully signed in!");
+
+            } else {
+                toast.error("Invalid credentials. Please try again.");
+
+
+
+            }
+            // Optionally, you can redirect the user after successful sign-in
+        } catch (error) {
+            console.error("Error during sign-in:", error);
+            toast.error("Failed to sign in. Please check your credentials and try again.");
+
+        }
+
     };
     return (
         <div className="flex items-center justify-center p-8 bg-white">
