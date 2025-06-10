@@ -5,7 +5,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import registerUser from '@/app/actions/auth/register';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+
 const schema = z.object({
     name: z.string(),
     email: z.string().email({ message: "Invalid email address" }),
@@ -15,6 +17,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const SignUpForm = () => {
+    const router = useRouter()
     const {
         register,
         handleSubmit,
@@ -25,7 +28,8 @@ const SignUpForm = () => {
         const result = await registerUser(data)
         console.log(result);
         if (result?.acknowledged === true) {
-            toast.success('user register success')
+            toast.success('user register success. Login Now!')
+            router.push('/login')
         } else {
             toast.error(result?.message)
         }
