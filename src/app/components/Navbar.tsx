@@ -253,7 +253,7 @@ export function NavigationMenuDemo() {
                                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                             <DropdownMenuGroup>
                                                 <DropdownMenuItem>
-                                                    Profile
+                                                   <Link href={'/profile'}> Profile</Link>
                                                     <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem>

@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "www.growthbarseo.com",
       },
+      {
+        protocol: "https",
+        hostname: "i.pravatar.cc"
+      },
     ],
   },
 };
