@@ -30,6 +30,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { signOut, useSession } from "next-auth/react"
+import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails"
+
 
 const components = [
     {
@@ -71,10 +73,12 @@ const components = [
 
 export function NavigationMenuDemo() {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+    const { userDetails, isLoading, error } = useCurrentUserDetails()
 
+    console.log(userDetails);
     const { setTheme } = useTheme()
     const session = useSession()
-    console.log("session", session);
+
     return (
         <div className="container mx-auto px-4 py-2 flex items-center justify-between">
             <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
@@ -253,7 +257,7 @@ export function NavigationMenuDemo() {
                                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                             <DropdownMenuGroup>
                                                 <DropdownMenuItem>
-                                                    Profile
+                                                    <Link href={'/profile'}> Profile</Link>
                                                     <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem>
@@ -261,12 +265,14 @@ export function NavigationMenuDemo() {
                                                     <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem>
-                                                    Settings
-                                                    <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                                                    <Link href={'/dashboard/home'}>
+                                                        Dashboard
+                                                    </Link>
+                                                    <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem>
-                                                    Keyboard shortcuts
-                                                    <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+                                                    Settings
+                                                    <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                                                 </DropdownMenuItem>
                                             </DropdownMenuGroup>
                                             <DropdownMenuSeparator />
