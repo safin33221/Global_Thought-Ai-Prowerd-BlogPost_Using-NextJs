@@ -18,10 +18,10 @@ import {
 import clsx from "clsx";
 
 const menuItems = [
-  { label: "My Posts", icon: FileText, href: "/dashboard", roles: ["USER", "ADMIN"] },
+  { label: "Analytics", icon: BarChart, href: "/dashboard/", roles: ["USER", "ADMIN"] },
+  { label: "My Posts", icon: FileText, href: "/dashboard/blog/myBlog", roles: ["USER", "ADMIN"] },
   { label: "Create Post", icon: PlusCircle, href: "/dashboard/blog/create", roles: ["USER", "ADMIN"] },
   { label: "Drafts", icon: Folder, href: "/dashboard/drafts", roles: ["USER", "ADMIN"] },
-  { label: "Analytics", icon: BarChart, href: "/dashboard/analytics", roles: ["USER", "ADMIN"] },
   { label: "Profile", icon: User, href: "/dashboard/profile", roles: ["USER", "ADMIN"] },
   // Admin-only
   { label: "All Posts", icon: Files, href: "/dashboard/posts", roles: ["ADMIN"] },

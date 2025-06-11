@@ -17,12 +17,12 @@ export interface loginPayload {
 }
 
 export interface BlogPost {
-  id: string;
+  _id?: string;
   title: string;
   slug: string;
   content: string;
   excerpt?: string;
-  coverImage?: string;
+  cover?: string;
   authorId: string;
   category?: string;
   tags?: string[];

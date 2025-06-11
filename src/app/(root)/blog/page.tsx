@@ -1,8 +1,25 @@
+"use client"
 import BlogCard from '@/app/components/BlogCard';
-import SectionTitle from '@/app/components/SectionTitle';
-import React from 'react';
+import { BlogPost } from '@/types/types';
 
-const page = () => {
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+
+const Blog = () => {
+    const [blogs, setBlogs] = useState<BlogPost>([]);
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const res = await axios.get('/api/blog');
+                setBlogs(res.data.blogs); // <-- set blogs here
+            } catch (error) {
+                console.error('Error fetching blogs:', error);
+            }
+        };
+        getData();
+    }, []);
+    console.log(blogs);
     const featuredPosts = [
         {
             title: "The Rise of AI in Blogging",
@@ -56,11 +73,11 @@ const page = () => {
     return (
         <div>
             <section className="">
-               
+
                 <div className="container mx-auto px-4 text-center">
                     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        {featuredPosts.map((post) => (
-                            <BlogCard key={post.slug} {...post} />
+                        {blogs.map((post) => (
+                            <BlogCard key={post._id} {...post} />
                         ))}
 
                     </div>
@@ -70,4 +87,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Blog;
