@@ -5,7 +5,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import registerUser from '@/app/actions/auth/register';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+
 const schema = z.object({
     name: z.string(),
     email: z.string().email({ message: "Invalid email address" }),
@@ -15,6 +17,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const SignUpForm = () => {
+    const router = useRouter()
     const {
         register,
         handleSubmit,
@@ -23,9 +26,10 @@ const SignUpForm = () => {
 
     const onSubmit = async (data: FormData) => {
         const result = await registerUser(data)
-        console.log(result);
+  
         if (result?.acknowledged === true) {
-            toast.success('user register success')
+            toast.success('user register success. Login Now!')
+            router.push('/login')
         } else {
             toast.error(result?.message)
         }
@@ -33,14 +37,14 @@ const SignUpForm = () => {
 
     };
     return (
-        <div className="flex items-center justify-center p-8 bg-white">
+        <div className="flex items-center justify-center p-16 rounded-4xl shadow-cyan-50    backdrop-blur-lg bg-transparent">
 
             <div className="w-full max-w-md">
-                <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">Welcome  👋</h2>
+                <h2 className="text-3xl font-bold mb-6  text-center">Welcome  👋</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                     <div>
-                        <label className="text-sm font-medium text-gray-700">Name</label>
+                        <label className="text-sm font-medium text-gray-200">Name</label>
                         <input
                             type="name"
                             {...register("name")}
@@ -52,7 +56,7 @@ const SignUpForm = () => {
                         )}
                     </div>
                     <div>
-                        <label className="text-sm font-medium text-gray-700">Email</label>
+                        <label className="text-sm font-medium text-gray-200">Email</label>
                         <input
                             type="email"
                             {...register("email")}
@@ -65,7 +69,7 @@ const SignUpForm = () => {
                     </div>
 
                     <div>
-                        <label className="text-sm font-medium text-gray-700">Password</label>
+                        <label className="text-sm font-medium text-gray-200">Password</label>
                         <input
                             type="password"
                             {...register("password")}
@@ -79,15 +83,15 @@ const SignUpForm = () => {
 
                     <button
                         type="submit"
-                        className="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition"
+                        className="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-200 transition"
                     >
                         Sign Up
                     </button>
                 </form>
 
-                <p className="mt-6 text-center text-sm text-gray-600">
-                    already have an account?{" "}
-                    <a href="/login" className="text-blue-600 hover:underline">
+                <p className="mt-6 text-center text-sm text-gray-300">
+                    Already have an account?{" "}
+                    <a href="/login" className="text-blue-700 hover:underline">
                         SignIn
                     </a>
                 </p>

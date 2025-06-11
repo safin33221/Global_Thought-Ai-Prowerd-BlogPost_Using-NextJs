@@ -34,7 +34,7 @@ const SignInFrom = () => {
                 callbackUrl: "/",
                 redirect: false
             });
-            console.log(response);
+   
             // Check if the sign-in was successful
             if (!response) {
                 toast.error("Failed to sign in. Please check your credentials and try again.");
@@ -51,21 +51,24 @@ const SignInFrom = () => {
             }
             // Optionally, you can redirect the user after successful sign-in
         } catch (error) {
-            console.error("Error during sign-in:", error);
-            toast.error("Failed to sign in. Please check your credentials and try again.");
+            // console.error("Error during sign-in:", error);
+            if(error){
+
+                return toast.error("Failed to sign in. Please check your credentials and try again.");
+            }
 
         }
 
     };
     return (
-        <div className="flex items-center justify-center p-8 bg-white">
+        <div className="flex items-center  justify-center rounded-4xl shadow-cyan-50   p-16 bg-transparent backdrop-blur-lg">
 
-            <div className="w-full max-w-md">
-                <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">Welcome Back 👋</h2>
+            <div className="w-full ">
+                <h2 className="text-3xl font-bold mb-6  text-center">Welcome Back 👋</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                     <div>
-                        <label className="text-sm font-medium text-gray-700">Email</label>
+                        <label className="text-sm font-medium text-gray-200">Email</label>
                         <input
                             type="email"
                             {...register("email")}
@@ -78,7 +81,7 @@ const SignInFrom = () => {
                     </div>
 
                     <div>
-                        <label className="text-sm font-medium text-gray-700">Password</label>
+                        <label className="text-sm font-medium text-gray-200">Password</label>
                         <input
                             type="password"
                             {...register("password")}
@@ -98,7 +101,7 @@ const SignInFrom = () => {
                     </button>
                 </form>
 
-                <p className="mt-6 text-center text-sm text-gray-600">
+                <p className="mt-6 text-center text-sm text-gray-300">
                     Do not have an account?{" "}
                     <a href="/register" className="text-blue-600 hover:underline">
                         Register

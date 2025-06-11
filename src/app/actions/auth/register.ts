@@ -1,10 +1,10 @@
 "use server"
 import bcrypt from "bcrypt"
 import { CollectionObjects, dbConnect } from "@/lib/dbConnect";
-import { RegisterPayload } from "@/types/types"
+import { User } from "@/types/types"
 import toast from "react-hot-toast";
 
-const registerUser = async (payload: RegisterPayload) => {
+const registerUser = async (payload: User) => {
     const { name, email, password } = payload;
     console.log(name, email);
 

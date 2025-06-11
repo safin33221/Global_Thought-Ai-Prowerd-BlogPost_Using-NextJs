@@ -30,7 +30,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { signOut, useSession } from "next-auth/react"
-import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails"
+
 
 
 const components = [
@@ -73,9 +73,8 @@ const components = [
 
 export function NavigationMenuDemo() {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-    const { userDetails, isLoading, error } = useCurrentUserDetails()
 
-    console.log(userDetails);
+
     const { setTheme } = useTheme()
     const session = useSession()
 
@@ -265,7 +264,7 @@ export function NavigationMenuDemo() {
                                                     <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem>
-                                                    <Link href={'/dashboard/home'}>
+                                                    <Link href={'/dashboard'}>
                                                         Dashboard
                                                     </Link>
                                                     <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
@@ -305,9 +304,7 @@ export function NavigationMenuDemo() {
                                             </DropdownMenuItem>
                                         </DropdownMenuContent>
                                     </DropdownMenu>
-                                    <button className="border py-2 px-4 rounded-lg" >
-                                        logout
-                                    </button>
+
                                 </div>) : (
                                 <div>
                                     <Link href="/login" className="text-sm font-medium text-blue-600 hover:underline">Login</Link>
@@ -322,7 +319,7 @@ export function NavigationMenuDemo() {
 
             {/* Mobile Menu Content */}
             {mobileMenuOpen && (
-                <div className="absolute top-16 left-0 right-0 text-black bg-white  z-50 flex flex-col p-4 shadow-md space-y-4 md:hidden">
+                <div className="absolute top-16 left-0 right-0 text-black backdrop-blur-2xl bg-transparent text-white  z-50 flex flex-col p-4 shadow-md space-y-4 md:hidden">
                     <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
                     <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
                     <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
