@@ -15,17 +15,17 @@ import {
 import clsx from "clsx";
 
 const menuItems = [
-  { label: "Dashboard", icon: Home, href: "/dashboard" },
-  { label: "My blog", icon: ShoppingCart, href: "/blog" },
-  { label: "Create Blog", icon: LayoutGrid, href: "/blog/create" },
-  { label: "Customer Review", icon: MessageCircle, href: "/reviews" },
+  { label: "My Post", icon: Home, href: "/dashboard" },
+  { label: "Create Blog", icon: LayoutGrid, href: "/dashboard/blog/create" },
+  { label: " Drafts", icon: MessageCircle, href: "/dashboard/Drafts" },
+  { label: " Stats ", icon: MessageCircle, href: "/dashboard/Stats" },
 ];
 
 const otherItems = [
-  { label: "Settings", icon: Settings, href: "/settings" },
-  { label: "Payment", icon: CreditCard, href: "/payment" },
-  { label: "Accounts", icon: User, href: "/accounts" },
-  { label: "Help", icon: HelpCircle, href: "/help" },
+  { label: "Settings", icon: Settings, href: "/dashboard/settings" },
+  { label: "Payment", icon: CreditCard, href: "/dashboard/payment" },
+  { label: "Accounts", icon: User, href: "/dashboard/accounts" },
+  { label: "Help", icon: HelpCircle, href: "/dashboard/help" },
 ];
 
 
