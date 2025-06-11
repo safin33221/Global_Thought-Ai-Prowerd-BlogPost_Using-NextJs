@@ -73,7 +73,7 @@ const components = [
 
 export function NavigationMenuDemo() {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-    const { userDetails, isLoading, error } = useCurrentUserDetails()
+    const { userDetails, } = useCurrentUserDetails()
 
     console.log(userDetails);
     const { setTheme } = useTheme()
@@ -305,9 +305,7 @@ export function NavigationMenuDemo() {
                                             </DropdownMenuItem>
                                         </DropdownMenuContent>
                                     </DropdownMenu>
-                                    <button className="border py-2 px-4 rounded-lg" >
-                                        logout
-                                    </button>
+
                                 </div>) : (
                                 <div>
                                     <Link href="/login" className="text-sm font-medium text-blue-600 hover:underline">Login</Link>

@@ -1,40 +1,51 @@
 "use client"
 import { useState } from "react";
 import {
-  Home,
-  ShoppingCart,
-  LayoutGrid,
-  MessageCircle,
-  Settings,
-  CreditCard,
+  FileText,
+  PlusCircle,
+  Folder,
+  BarChart,
   User,
+  Files,
+  Users,
+  Tags,
+  Settings,
+  MenuIcon,
+  CreditCard,
   HelpCircle,
-  Menu as MenuIcon,
-  X
 } from "lucide-react";
 import clsx from "clsx";
 
 const menuItems = [
-  { label: "My Post", icon: Home, href: "/dashboard" },
-  { label: "Create Blog", icon: LayoutGrid, href: "/dashboard/blog/create" },
-  { label: " Drafts", icon: MessageCircle, href: "/dashboard/Drafts" },
-  { label: " Stats ", icon: MessageCircle, href: "/dashboard/Stats" },
+  { label: "My Posts", icon: FileText, href: "/dashboard/my-posts" },
+  { label: "Create Post", icon: PlusCircle, href: "/dashboard/create" },
+  { label: "Drafts", icon: Folder, href: "/dashboard/drafts" },
+  { label: "Analytics", icon: BarChart, href: "/dashboard/analytics" },
+  { label: "Profile", icon: User, href: "/dashboard/profile" },
+  // Admin-only
+  { label: "All Posts", icon: Files, href: "/dashboard/posts" },
+  { label: "Users", icon: Users, href: "/dashboard/users" },
+  { label: "Categories", icon: Tags, href: "/dashboard/categories" },
+  { label: "Settings", icon: Settings, href: "/dashboard/settings" },
 ];
 
 const otherItems = [
+  { label: "View site", icon: Settings, href: "/" },
   { label: "Settings", icon: Settings, href: "/dashboard/settings" },
   { label: "Payment", icon: CreditCard, href: "/dashboard/payment" },
-  { label: "Accounts", icon: User, href: "/dashboard/accounts" },
+  { label: "Accounts", icon: User, href: "/dashboard/profile" },
   { label: "Help", icon: HelpCircle, href: "/dashboard/help" },
 ];
 
 
 import React from 'react';
 import Link from "next/link";
+import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails";
 
 const DashboardAside = () => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Dashboard");
+  const { userDetails } = useCurrentUserDetails()
 
   const renderLink = (item: { label: string; icon: React.ElementType; href: string }) => {
     const Icon = item.icon;
@@ -47,7 +58,7 @@ const DashboardAside = () => {
         onClick={() => setActive(item.label)}
         className={clsx(
           "flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition-all",
-          isActive ? "bg-white text-indigo-600 shadow" : "text-gray-400 hover:text-white hover:bg-indigo-500"
+          isActive ? "bg-white text-indigo-600 shadow" : " hover:text-white hover:bg-indigo-500"
         )}
       >
         <Icon className="w-5 h-5" />
@@ -68,7 +79,11 @@ const DashboardAside = () => {
 
       <div className={clsx("space-y-6", { hidden: !open && window.innerWidth < 768, block: open || window.innerWidth >= 768 })}>
         <div>
-          <h2 className="text-sm text-indigo-200 font-semibold mb-2">MENU</h2>
+          <div>
+            <h1 className=" text-2xl font-bold " >Global Thought</h1>
+            <p>{userDetails?.name}</p>
+          </div>
+          <div className=" border my-7"></div>
           <div className="space-y-1">
             {menuItems.map(renderLink)}
           </div>
