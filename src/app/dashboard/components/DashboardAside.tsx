@@ -17,16 +17,16 @@ import {
 import clsx from "clsx";
 
 const menuItems = [
-  { label: "My Posts", icon: FileText, href: "/dashboard/my-posts" },
-  { label: "Create Post", icon: PlusCircle, href: "/dashboard/create" },
-  { label: "Drafts", icon: Folder, href: "/dashboard/drafts" },
-  { label: "Analytics", icon: BarChart, href: "/dashboard/analytics" },
-  { label: "Profile", icon: User, href: "/dashboard/profile" },
+  { label: "My Posts", icon: FileText, href: "/dashboard/my-posts", roles: ["USER", "ADMIN"] },
+  { label: "Create Post", icon: PlusCircle, href: "/dashboard/create", roles: ["USER", "ADMIN"] },
+  { label: "Drafts", icon: Folder, href: "/dashboard/drafts", roles: ["USER", "ADMIN"] },
+  { label: "Analytics", icon: BarChart, href: "/dashboard/analytics", roles: ["USER", "ADMIN"] },
+  { label: "Profile", icon: User, href: "/dashboard/profile", roles: ["USER", "ADMIN"] },
   // Admin-only
-  { label: "All Posts", icon: Files, href: "/dashboard/posts" },
-  { label: "Users", icon: Users, href: "/dashboard/users" },
-  { label: "Categories", icon: Tags, href: "/dashboard/categories" },
-  { label: "Settings", icon: Settings, href: "/dashboard/settings" },
+  { label: "All Posts", icon: Files, href: "/dashboard/posts", roles: ["ADMIN"] },
+  { label: "Users", icon: Users, href: "/dashboard/users", roles: ["ADMIN"] },
+  { label: "Categories", icon: Tags, href: "/dashboard/categories", roles: ["ADMIN"] },
+  { label: "Settings", icon: Settings, href: "/dashboard/settings", roles: ["ADMIN"] },
 ];
 
 const otherItems = [
@@ -41,11 +41,15 @@ const otherItems = [
 import React from 'react';
 import Link from "next/link";
 import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails";
+import Loader from "@/app/components/Loader";
 
 const DashboardAside = () => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Dashboard");
-  const { userDetails } = useCurrentUserDetails()
+  const { userDetails ,isLoading} = useCurrentUserDetails()
+  if(isLoading) <Loader/>
+  console.log("``````````````",userDetails);
+  const role = userDetails?.role
 
   const renderLink = (item: { label: string; icon: React.ElementType; href: string }) => {
     const Icon = item.icon;
@@ -69,7 +73,7 @@ const DashboardAside = () => {
 
 
   return (
-    <aside className=" min-h-screen w-72 border  p-4 fixed md:static z-50 md:z-auto transition-all duration-300">
+    <aside className=" min-h-screen w-64 border  p-4 fixed md:static z-50 md:z-auto transition-all duration-300">
       <div className="flex items-center justify-between mb-6 md:hidden">
 
         <button onClick={() => setOpen(!open)}>
@@ -85,11 +89,14 @@ const DashboardAside = () => {
           </div>
           <div className=" border my-7"></div>
           <div className="space-y-1">
-            {menuItems.map(renderLink)}
+            {menuItems.filter((item) => item.roles.includes(role)).map(renderLink)}
           </div>
         </div>
+        <div className="border  my-5">
+
+        </div>
         <div>
-          <h2 className="text-sm text-indigo-200 font-semibold mb-2">OTHERS</h2>
+
           <div className="space-y-1">
             {otherItems.map(renderLink)}
           </div>

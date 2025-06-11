@@ -4,12 +4,13 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
+
 export function useCurrentUserDetails() {
     const { data: session, status } = useSession();
-    const [userDetails, setUserDetails] = useState<any >(null);
-    const [loading, setLoading] = useState(true);
+    const [userDetails, setUserDetails] = useState<any>(null);
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-;
+    ;
 
     useEffect(() => {
         const fetchUserDetails = async () => {
