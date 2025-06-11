@@ -47,7 +47,7 @@ const DashboardAside = () => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Dashboard");
   const { userDetails ,isLoading} = useCurrentUserDetails()
-  if(isLoading) <Loader/>
+
   console.log("``````````````",userDetails);
   const role = userDetails?.role
 
