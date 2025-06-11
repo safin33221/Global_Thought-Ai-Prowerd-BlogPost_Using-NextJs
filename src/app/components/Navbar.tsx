@@ -265,7 +265,7 @@ export function NavigationMenuDemo() {
                                                     <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem>
-                                                    <Link href={'/dashboard/home'}>
+                                                    <Link href={'/dashboard'}>
                                                         Dashboard
                                                     </Link>
                                                     <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
