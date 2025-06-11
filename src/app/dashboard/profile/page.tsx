@@ -7,13 +7,14 @@ import Loader from "@/app/components/Loader";
 import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails";
 import { handleImageUpload } from "@/utils";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const ProfilePage = () => {
 
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { userDetails, isLoading } = useCurrentUserDetails();
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-    const [imageFile, setImageFile] = useState<string | null>(null);
+    const [imageFile, setImageFile] = useState<File | null>(null);
     console.log("pres ----------", previewUrl);
     const handleEditClick = () => {
         fileInputRef.current?.click();
@@ -32,6 +33,7 @@ const ProfilePage = () => {
         }
     };
     const handleSaveChangePhoto = async () => {
+        if(!imageFile) return toast.error("Image File not found")
         const url = await handleImageUpload(imageFile)
 
         const res = await axios.put(`/api/users/${userDetails?.email}`, { url })

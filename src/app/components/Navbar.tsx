@@ -2,7 +2,7 @@
 import { useTheme } from "next-themes"
 import * as React from "react"
 import Link from "next/link"
-import { MenuIcon, XIcon, CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react"
+import { MenuIcon, XIcon, CircleCheckIcon, CircleHelpIcon, CircleIcon, User } from "lucide-react"
 import { Moon, Sun } from "lucide-react"
 
 import {
@@ -252,16 +252,19 @@ export function NavigationMenuDemo() {
                                 <div className="flex gap-2 items-center">
                                     <DropdownMenu>
                                         <DropdownMenuTrigger asChild>
-                                          
+
+                                            {userDetails?.avatarUrl ? (
                                                 <Image
-                                                    src={userDetails?.avatarUrl}
+                                                    src={userDetails.avatarUrl}
                                                     alt="Profile"
                                                     width={20}
                                                     height={20}
                                                     className="w-12 h-12 rounded-full bg-cover object-center"
-
                                                 />
-                                            
+                                            ) : (
+                                                <User className="w-12 h-12 rounded-full bg-gray-200 p-2" />
+                                            )}
+
                                         </DropdownMenuTrigger>
                                         <DropdownMenuContent className="w-56" align="start">
                                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
