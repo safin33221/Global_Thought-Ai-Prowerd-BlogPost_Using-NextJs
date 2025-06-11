@@ -1,15 +1,15 @@
 "use client"
 import React from "react";
-import { Pencil, X } from "lucide-react";
+import { Pencil } from "lucide-react";
 
 import Image from "next/image";
 
 import Loader from "@/app/components/Loader";
 import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails";
 
-const page = () => {
+const ProfilePage = () => {
 
-    const { userDetails, isLoading, error } = useCurrentUserDetails()
+    const { userDetails, isLoading, } = useCurrentUserDetails()
     if (isLoading) return <Loader/>
     return (
         <div className="min-h-fit mt-20 flex items-center justify-center   p-4">
@@ -78,4 +78,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default ProfilePage;

@@ -1,13 +1,14 @@
 
 "use client";
 
+import { User } from "@/types/types";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 
 export function useCurrentUserDetails() {
     const { data: session, status } = useSession();
-    const [userDetails, setUserDetails] = useState<any>(null);
+    const [userDetails, setUserDetails] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     ;
@@ -21,8 +22,12 @@ export function useCurrentUserDetails() {
                     if (!res.ok) throw new Error("Failed to fetch user details");
                     const data = await res.json();
                     setUserDetails(data);
-                } catch (err: any) {
-                    setError(err.message);
+                } catch (err) {
+                    if (err instanceof Error) {
+                        setError(err.message);
+                    } else {
+                        console.error("An unknown error occurred");
+                    }
                 } finally {
                     setLoading(false);
                 }

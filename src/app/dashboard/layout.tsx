@@ -6,7 +6,7 @@ import Loader from "../components/Loader";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const { userDetails, isLoading } = useCurrentUserDetails()
+  const { isLoading } = useCurrentUserDetails()
   if (isLoading) return <Loader />
   return (
 

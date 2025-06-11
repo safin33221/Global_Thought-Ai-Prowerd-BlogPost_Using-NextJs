@@ -13,6 +13,7 @@ import {
   MenuIcon,
   CreditCard,
   HelpCircle,
+  X,
 } from "lucide-react";
 import clsx from "clsx";
 
@@ -41,14 +42,14 @@ const otherItems = [
 import React from 'react';
 import Link from "next/link";
 import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails";
-import Loader from "@/app/components/Loader";
+
 
 const DashboardAside = () => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Dashboard");
-  const { userDetails ,isLoading} = useCurrentUserDetails()
+  const { userDetails } = useCurrentUserDetails()
 
-  console.log("``````````````",userDetails);
+  console.log("``````````````", userDetails);
   const role = userDetails?.role
 
   const renderLink = (item: { label: string; icon: React.ElementType; href: string }) => {
@@ -89,7 +90,7 @@ const DashboardAside = () => {
           </div>
           <div className=" border my-7"></div>
           <div className="space-y-1">
-            {menuItems.filter((item) => item.roles.includes(role)).map(renderLink)}
+            {menuItems.filter((item) => item.roles.includes(role ?? "USER")).map(renderLink)}
           </div>
         </div>
         <div className="border  my-5">

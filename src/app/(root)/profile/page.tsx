@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails";
 import Loader from "@/app/components/Loader";
 
-const page = () => {
+const ProfilePage = () => {
  
     const { userDetails, isLoading } = useCurrentUserDetails()
     if (isLoading) return <Loader/>
@@ -77,4 +77,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default ProfilePage;
