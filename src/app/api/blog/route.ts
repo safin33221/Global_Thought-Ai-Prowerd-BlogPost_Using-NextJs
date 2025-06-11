@@ -13,7 +13,8 @@ export async function POST(req: Request) {
         const savedBlog = await blogCollection.insertOne(blogData);
 
         return NextResponse.json({ success: true, blog: savedBlog }, { status: 201 });
-    } catch (error: any) {
-        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : "Unknown Error"
+        return NextResponse.json({ success: false, error: message }, { status: 500 });
     }
 }

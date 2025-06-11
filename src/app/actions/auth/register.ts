@@ -25,7 +25,8 @@ const registerUser = async (payload: User) => {
     if (!existingUser) {
         const hashPassword = await bcrypt.hash(password, 10);
         user.password = hashPassword;
-        const result = await userCollection.insertOne(user)
+        const { _id, ...userWithoutId } = user;
+        const result = await userCollection.insertOne(userWithoutId)
         result.insertedId.toString();
         return result;
     }
