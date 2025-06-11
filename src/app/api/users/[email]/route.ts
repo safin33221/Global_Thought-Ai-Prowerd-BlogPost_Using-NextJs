@@ -4,10 +4,10 @@ import { CollectionObjects, dbConnect } from "@/lib/dbConnect"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(req: NextRequest, { params }: { params: { email: string } }) {
-
+    const { email } = params;
     const userCollection = await dbConnect(CollectionObjects.userCollection)
     try {
-        const user = await userCollection.findOne({ email: params.email })
+        const user = await userCollection.findOne({ email})
         if (!user) {
             return NextResponse.json({ message: "User not Found" }, { status: 404 })
         }

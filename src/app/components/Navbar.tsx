@@ -30,6 +30,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { signOut, useSession } from "next-auth/react"
+import Image from "next/image"
+import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails"
 
 
 
@@ -73,7 +75,7 @@ const components = [
 
 export function NavigationMenuDemo() {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-
+    const { userDetails } = useCurrentUserDetails()
 
     const { setTheme } = useTheme()
     const session = useSession()
@@ -250,7 +252,16 @@ export function NavigationMenuDemo() {
                                 <div className="flex gap-2 items-center">
                                     <DropdownMenu>
                                         <DropdownMenuTrigger asChild>
-                                            <Button variant="outline">Open</Button>
+                                          
+                                                <Image
+                                                    src={userDetails?.avatarUrl}
+                                                    alt="Profile"
+                                                    width={20}
+                                                    height={20}
+                                                    className="w-12 h-12 rounded-full bg-cover object-center"
+
+                                                />
+                                            
                                         </DropdownMenuTrigger>
                                         <DropdownMenuContent className="w-56" align="start">
                                             <DropdownMenuLabel>My Account</DropdownMenuLabel>
