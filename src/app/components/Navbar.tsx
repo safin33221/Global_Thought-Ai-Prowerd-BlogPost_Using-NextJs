@@ -319,7 +319,7 @@ export function NavigationMenuDemo() {
 
             {/* Mobile Menu Content */}
             {mobileMenuOpen && (
-                <div className="absolute top-16 left-0 right-0 text-black backdrop-blur-2xl bg-transparent text-white  z-50 flex flex-col p-4 shadow-md space-y-4 md:hidden">
+                <div className="absolute top-16 left-0 right-0  backdrop-blur-2xl bg-transparent text-white  z-50 flex flex-col p-4 shadow-md space-y-4 md:hidden">
                     <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
                     <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
                     <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</Link>

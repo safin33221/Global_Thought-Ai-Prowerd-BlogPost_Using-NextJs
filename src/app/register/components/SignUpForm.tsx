@@ -31,7 +31,7 @@ const SignUpForm = () => {
             toast.success('user register success. Login Now!')
             router.push('/login')
         } else {
-            toast.error(result?.message)
+            toast.error(result && 'message' in result ? result.message : 'Registration failed')
         }
 
 
