@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails";
 import { X } from "lucide-react";
 import { useState } from "react";
@@ -50,6 +51,8 @@ export default function CreatePostPage() {
     };
 
     const handleSubmit = async () => {
+
+
         const BlogData: BlogPost = {
             title,
             cover: imageUrl,
@@ -62,21 +65,18 @@ export default function CreatePostPage() {
             status: 'published'
 
         };
-        console.log(BlogData);
+        const res = await axios.post("/api/blog", BlogData);
+        if (res.status === 201) {
+            setTitle("");
+            setContent("");
+            setTags("");
+            setLinks([]);
+            setImageUrl("");
+            toast.success("Blog published successfully")
+        }
 
 
-        // const res = await fetch("/api/posts", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(postData),
-        // });
 
-        // if (res.ok) {
-        //     setTitle("");
-        //     setContent("");
-        //     setTags("");
-        //     setLinks([]);
-        // }
     };
 
     return (
