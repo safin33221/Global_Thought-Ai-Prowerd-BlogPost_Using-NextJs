@@ -4,6 +4,7 @@
 import { User } from "@/types/types";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 
 export function useCurrentUserDetails() {
@@ -18,7 +19,7 @@ export function useCurrentUserDetails() {
             if (session?.user?.email) {
                 try {
                     const res = await fetch(`/api/users/${session?.user?.email}`);
-                    console.log(res);
+          
                     if (!res.ok) throw new Error("Failed to fetch user details");
                     const data = await res.json();
                     setUserDetails(data);
@@ -26,7 +27,7 @@ export function useCurrentUserDetails() {
                     if (err instanceof Error) {
                         setError(err.message);
                     } else {
-                        console.error("An unknown error occurred");
+                        toast.error("An unknown error occurred");
                     }
                 } finally {
                     setLoading(false);

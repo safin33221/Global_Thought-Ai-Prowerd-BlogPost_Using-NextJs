@@ -49,7 +49,6 @@ const DashboardAside = () => {
   const [active, setActive] = useState("Dashboard");
   const { userDetails } = useCurrentUserDetails()
 
-  console.log("``````````````", userDetails);
   const role = userDetails?.role
 
   const renderLink = (item: { label: string; icon: React.ElementType; href: string }) => {

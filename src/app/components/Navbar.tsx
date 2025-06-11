@@ -30,7 +30,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { signOut, useSession } from "next-auth/react"
-import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails"
+
 
 
 const components = [
@@ -73,9 +73,8 @@ const components = [
 
 export function NavigationMenuDemo() {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
-    const { userDetails, } = useCurrentUserDetails()
 
-    console.log(userDetails);
+
     const { setTheme } = useTheme()
     const session = useSession()
 

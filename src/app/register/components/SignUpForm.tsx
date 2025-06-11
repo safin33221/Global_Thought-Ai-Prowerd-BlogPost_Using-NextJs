@@ -26,7 +26,7 @@ const SignUpForm = () => {
 
     const onSubmit = async (data: FormData) => {
         const result = await registerUser(data)
-        console.log(result);
+  
         if (result?.acknowledged === true) {
             toast.success('user register success. Login Now!')
             router.push('/login')

@@ -6,9 +6,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { handleImageUpload } from "@/utils";
 interface BlogPost {
     _id?: string; // optional for new posts before saving to DB
     title: string;
+    cover: string;
     content: string;
     tags?: string[]; // optional: list of tags/keywords
     links?: {
@@ -29,6 +31,7 @@ export default function CreatePostPage() {
     const [linkLabel, setLinkLabel] = useState("");
     const [linkURL, setLinkURL] = useState("");
     const [links, setLinks] = useState<{ label: string; url: string }[]>([]);
+    const [imageUrl, setImageUrl] = useState("");
     const { userDetails } = useCurrentUserDetails()
 
     const handleAddLink = () => {
@@ -39,10 +42,17 @@ export default function CreatePostPage() {
             setLinkURL("");
         }
     };
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const url = await handleImageUpload(file); // Use Cloudinary or your API
+        setImageUrl(url);
+    };
 
     const handleSubmit = async () => {
         const BlogData: BlogPost = {
             title,
+            cover: imageUrl,
             content,
             tags: tags.split(",").map((tag) => tag.trim()),
             links,
@@ -105,7 +115,8 @@ export default function CreatePostPage() {
                     </label>
                     <div className="grid w-full p-2 items-center gap-3">
                         <Label htmlFor="picture">Picture</Label>
-                        <Input id="picture" type="file" />
+                        <Input id="picture" type="file"
+                            onChange={handleFileChange} />
                     </div>
                 </div>
 
