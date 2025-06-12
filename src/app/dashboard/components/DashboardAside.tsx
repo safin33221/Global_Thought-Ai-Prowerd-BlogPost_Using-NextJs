@@ -107,7 +107,7 @@ const DashboardAside = () => {
           )
         }
 
-        <button className=" absolute z-20 top-0 left-0" onClick={() => setOpen(!open)}>
+        <button className=" absolute z-20 top-0 left-0 m-5" onClick={() => setOpen(!open)}>
           {open ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6 " />}
         </button>
       </div>

@@ -82,38 +82,29 @@ export function NavigationMenuDemo() {
 
     return (
         <div className="container mx-auto px-4 py-2 flex items-center justify-between">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Global Thought
-            </h1>
+            <div className="flex gap-2 items-center">
+                <button className=" md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                    {mobileMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
+                </button>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                    Global Thought
+                </h1>
+                {mobileMenuOpen && (
+                    <div className="    absolute top-16 left-0 right-0  backdrop-blur-2xl bg-transparent text-white  z-50 flex flex-col p-4 shadow-md space-y-4 md:hidden">
+                        <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+                        <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
+                        <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
+                        <Link href="/create" onClick={() => setMobileMenuOpen(false)}>Create</Link>
+                        <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>Dashboard</Link>
+                        <Link href="/login" onClick={() => setMobileMenuOpen(false)}>Login</Link>
+                        <Link href="/register" onClick={() => setMobileMenuOpen(false)}>Register</Link>
+                    </div>
+                )}
+            </div>
 
 
             {/* Mobile Toggle */}
-            <div className="md:hidden flex items-center gap-2 ">
-                <div className=" ">
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="icon">
-                                <Sun className="h-[1.2rem]  w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-                                <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-                                <span className="sr-only">Toggle theme</span>
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => setTheme("light")}>
-                                Light
-                            </DropdownMenuItem>
 
-                            <DropdownMenuItem onClick={() => setTheme("system")}>
-                                dark
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-
-                </div>
-                <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                    {mobileMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
-                </button>
-            </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-6">
@@ -227,7 +218,9 @@ export function NavigationMenuDemo() {
                     </NavigationMenuList>
                 </NavigationMenu>
 
-                <div className="hidden  p-3 md:flex gap-3 items-center ">
+            </div>
+            <div className="flex items-center justify-center">
+                <div className="  p-3 md:flex gap-3 items-center ">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="outline" size="icon">
@@ -246,103 +239,92 @@ export function NavigationMenuDemo() {
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <div>
-                        {
-                            session.status === "authenticated" ? (
-                                <div className="flex gap-2 items-center">
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
+                </div>
+                <div >
+                    {
+                        session.status === "authenticated" ? (
+                            <div className="flex gap-2 items-center">
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
 
-                                            {userDetails?.avatarUrl ? (
-                                                <Image
-                                                    src={userDetails.avatarUrl}
-                                                    alt="Profile"
-                                                    width={20}
-                                                    height={20}
-                                                    className="w-12 h-12 rounded-full bg-cover object-center"
-                                                />
-                                            ) : (
-                                                <User className="w-12 h-12 rounded-full bg-gray-200 p-2" />
-                                            )}
+                                        {userDetails?.avatarUrl ? (
+                                            <Image
+                                                src={userDetails.avatarUrl}
+                                                alt="Profile"
+                                                width={20}
+                                                height={20}
+                                                className="w-12 h-12 rounded-full bg-cover object-center"
+                                            />
+                                        ) : (
+                                            <User className="w-12 h-12 rounded-full bg-gray-200 p-2" />
+                                        )}
 
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent className="w-56" align="start">
-                                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                                            <DropdownMenuGroup>
-                                                <DropdownMenuItem>
-                                                    <Link href={'/profile'}> Profile</Link>
-                                                    <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Billing
-                                                    <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    <Link href={'/dashboard'}>
-                                                        Dashboard
-                                                    </Link>
-                                                    <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Settings
-                                                    <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-                                                </DropdownMenuItem>
-                                            </DropdownMenuGroup>
-                                            <DropdownMenuSeparator />
-                                            <DropdownMenuGroup>
-                                                <DropdownMenuItem>Team</DropdownMenuItem>
-                                                <DropdownMenuSub>
-                                                    <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
-                                                    <DropdownMenuPortal>
-                                                        <DropdownMenuSubContent>
-                                                            <DropdownMenuItem>Email</DropdownMenuItem>
-                                                            <DropdownMenuItem>Message</DropdownMenuItem>
-                                                            <DropdownMenuSeparator />
-                                                            <DropdownMenuItem>More...</DropdownMenuItem>
-                                                        </DropdownMenuSubContent>
-                                                    </DropdownMenuPortal>
-                                                </DropdownMenuSub>
-                                                <DropdownMenuItem>
-                                                    New Team
-                                                    <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-                                                </DropdownMenuItem>
-                                            </DropdownMenuGroup>
-                                            <DropdownMenuSeparator />
-                                            <DropdownMenuItem>GitHub</DropdownMenuItem>
-                                            <DropdownMenuItem>Support</DropdownMenuItem>
-                                            <DropdownMenuItem disabled>API</DropdownMenuItem>
-                                            <DropdownMenuSeparator />
-                                            <DropdownMenuItem onClick={() => signOut()}>
-                                                Log out
-                                                <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent className="w-56" align="start">
+                                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                        <DropdownMenuGroup>
+                                            <DropdownMenuItem>
+                                                <Link href={'/profile'}> Profile</Link>
+                                                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                                             </DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
+                                            <DropdownMenuItem>
+                                                Billing
+                                                <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem>
+                                                <Link href={'/dashboard'}>
+                                                    Dashboard
+                                                </Link>
+                                                <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem>
+                                                Settings
+                                                <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                        </DropdownMenuGroup>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuGroup>
+                                            <DropdownMenuItem>Team</DropdownMenuItem>
+                                            <DropdownMenuSub>
+                                                <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
+                                                <DropdownMenuPortal>
+                                                    <DropdownMenuSubContent>
+                                                        <DropdownMenuItem>Email</DropdownMenuItem>
+                                                        <DropdownMenuItem>Message</DropdownMenuItem>
+                                                        <DropdownMenuSeparator />
+                                                        <DropdownMenuItem>More...</DropdownMenuItem>
+                                                    </DropdownMenuSubContent>
+                                                </DropdownMenuPortal>
+                                            </DropdownMenuSub>
+                                            <DropdownMenuItem>
+                                                New Team
+                                                <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                        </DropdownMenuGroup>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem>GitHub</DropdownMenuItem>
+                                        <DropdownMenuItem>Support</DropdownMenuItem>
+                                        <DropdownMenuItem disabled>API</DropdownMenuItem>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem onClick={() => signOut()}>
+                                            Log out
+                                            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
 
-                                </div>) : (
-                                <div>
-                                    <Link href="/login" className="text-sm font-medium text-blue-600 hover:underline">Login</Link>
-                                    <span className="mx-2">|</span>
-                                    <Link href="/register" className="text-sm font-medium text-blue-600 hover:underline">Register</Link>
-                                </div>)
-                        }
+                            </div>) : (
+                            <div>
+                                <Link href="/login" className="text-sm font-medium text-blue-600 hover:underline">Login</Link>
+                                <span className="mx-2">|</span>
+                                <Link href="/register" className="text-sm font-medium text-blue-600 hover:underline">Register</Link>
+                            </div>)
+                    }
 
-                    </div>
                 </div>
             </div>
 
-            {/* Mobile Menu Content */}
-            {mobileMenuOpen && (
-                <div className="absolute top-16 left-0 right-0  backdrop-blur-2xl bg-transparent text-white  z-50 flex flex-col p-4 shadow-md space-y-4 md:hidden">
-                    <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-                    <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
-                    <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
-                    <Link href="/create" onClick={() => setMobileMenuOpen(false)}>Create</Link>
-                    <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>Dashboard</Link>
-                    <Link href="/login" onClick={() => setMobileMenuOpen(false)}>Login</Link>
-                    <Link href="/register" onClick={() => setMobileMenuOpen(false)}>Register</Link>
-                </div>
-            )}
+
         </div>
     )
 }
