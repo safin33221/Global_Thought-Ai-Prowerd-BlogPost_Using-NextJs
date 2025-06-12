@@ -1,22 +1,13 @@
 import { NavigationMenuDemo } from "../components/Navbar";
 
-export default function MainLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body
-       
-      >
-     
+    <main className="">
+      {/* Maybe a different navbar or header here */}
       <NavigationMenuDemo />
-
       {children}
-
-
-    </body>
-    </html >
-  );
+    </main>
+  )
 }
+
+

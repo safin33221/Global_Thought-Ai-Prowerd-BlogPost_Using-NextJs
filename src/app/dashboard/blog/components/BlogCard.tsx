@@ -8,11 +8,13 @@ import Image from 'next/image';
 import { BlogPost } from '@/types/types';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 
 
 
-const BlogCard = ({ title, content, author, cover, createdAt, links, tags }: BlogPost) => {
+const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, status }: BlogPost) => {
     const [open, setOpen] = useState(false);
     const [editableBlog, setEditableBlog] = useState({
         title: title,
@@ -30,13 +32,26 @@ const BlogCard = ({ title, content, author, cover, createdAt, links, tags }: Blo
             links: updatedLinks,
         }));
     };
+    const handleUpdate = async () => {
+        const toastId = toast.loading('Updating');
+        try {
+            const data = {
+                ...editableBlog,
+                tags: editableBlog.tags.split(',').map((tag) => tag.trim()),
+            };
+            const res = await axios.put(`/api/blog/${_id}`, data);
 
-    const handleUpdate = () => {
-        // console.log('Updated blog data:', {
-        //     ...editableBlog,
-        //     tags: editableBlog.tags.split(',').map((tag) => tag.trim()),
-        // });
-        // setOpen(false);
+            if (res.status === 200 && !res.data.error) {
+                toast.success('Blog Updated', { id: toastId });
+                setOpen(false);
+            } else {
+                toast.error(res.data?.error || 'Something went wrong', { id: toastId });
+            }
+        } catch (error) {
+            if (error) {
+                toast.error(error?.message || 'Something went wrong', { id: toastId });
+            }
+        }
     };
     return (
         <div className="bg-white rounded-xl shadow-md overflow-hidden max-w-md mx-auto" >
@@ -109,7 +124,7 @@ const BlogCard = ({ title, content, author, cover, createdAt, links, tags }: Blo
                                 ))}
                             </div>
 
-                            <Button onClick={handleUpdate}>Save Changes</Button>
+                            <Button type='button' onClick={handleUpdate}>Save Changes</Button>
                         </div>
                     </DialogContent>
                 </Dialog>
