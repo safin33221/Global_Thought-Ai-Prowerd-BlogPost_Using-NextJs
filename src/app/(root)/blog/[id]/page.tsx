@@ -22,7 +22,7 @@ const SingleBlog = ({ params }: { params: { id: string } }) => {
 
     return (
         <div>
-            <div className=" w-full mx-auto p-6 grid grid-cols-2 gap-4 items-center">
+            <div className=" w-full mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                 <div>
 
 
@@ -33,7 +33,7 @@ const SingleBlog = ({ params }: { params: { id: string } }) => {
                         alt="Cover Image"
                         width={800}
                         height={400}
-                        className="rounded-lg mb-6  object-cover h-[450px]"
+                        className="rounded-lg mb-6  object-cover h-[450px] bg-cover"
                     />
 
                 </div>
