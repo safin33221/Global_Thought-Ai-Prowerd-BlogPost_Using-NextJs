@@ -1,12 +1,21 @@
 "use client"
 
 
-import React from 'react';
+import { BlogPost } from '@/types/types';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-const page = ({ params }: { params: { id: string } }) => {
+const SingleBlog = ({ params }: { params: { id: string } }) => {
     const { id } = params;
-    console.log(id);
- 
+    const [blog, setBLog] = useState<object>({})
+    useEffect(() => {
+        const getSinglePost = async () => {
+            const res = await axios.get(`/api/blog/${id}`)
+            console.log(res.data);
+        }
+        getSinglePost()
+    }, [id])
+
 
     return (
         <div>
@@ -44,4 +53,4 @@ const page = ({ params }: { params: { id: string } }) => {
     );
 };
 
-export default page;
+export default SingleBlog;
