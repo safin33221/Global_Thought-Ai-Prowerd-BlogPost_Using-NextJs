@@ -8,32 +8,10 @@ import toast from "react-hot-toast";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { handleImageUpload } from "@/utils";
+import { BlogLink, BlogPost } from "@/types/types";
 
 // Interfaces
-interface BlogLink {
-  label: string;
-  url: string;
-}
 
-interface BlogAuthor {
-  name: string;
-  email: string;
-  authorId: string;
-  avatarUrl:string;
-}
-
-interface BlogPost {
-  _id?: string;
-  title: string;
-  cover: string;
-  content: string;
-  tags: string[];
-  links: BlogLink[];
-  author: BlogAuthor;
-  createdAt: string;
-  updatedAt: string;
-  status: "published" | "draft";
-}
 
 export default function CreatePostPage() {
   const [title, setTitle] = useState<string>("");
@@ -74,8 +52,8 @@ export default function CreatePostPage() {
       author: {
         name: userDetails?.name,
         email: userDetails?.email,
-        authorId: userDetails?._id,
-        avatarUrl: userDetails?.avatarUrl,
+        authorId: userDetails?._id ?? "",
+        avatarUrl: userDetails?.avatarUrl?? "",
       },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
