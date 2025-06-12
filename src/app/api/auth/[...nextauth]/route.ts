@@ -1,6 +1,7 @@
 import loginUser from "@/app/actions/auth/loginUsr";
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
+import toast from "react-hot-toast";
 
 export const authOptions = {
     // Configure one or more authentication providers
@@ -27,22 +28,24 @@ export const authOptions = {
                 }
                 const dbUser = await loginUser(credentials);
 
-                // Add logic here to look up the user from the credentials supplied
-
-                if (dbUser) {
-                    // Map dbUser to NextAuth User type
-                    return {
-                        id: dbUser._id?.toString() ?? dbUser.id ?? "",
-                        name: dbUser.name ?? null,
-                        email: dbUser.email ?? null,
-                        image: dbUser.image ?? null
-                    };
-                } else {
-                    // If you return null then an error will be displayed advising the user to check their details.
-                    return null;
-
-                    // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+                // If loginUser returns an error, throw it for NextAuth to handle
+                if (dbUser?.error) {
+                    toast.error(dbUser.error);
                 }
+
+                if (dbUser && dbUser.user) {
+                    // Map dbUser.user to NextAuth User type
+                    const user = dbUser.user;
+                    return {
+                        id: user._id?.toString() ?? user.id ?? "",
+                        name: user.name ?? null,
+                        email: user.email ?? null,
+                        image: user.image ?? null
+                    };
+                }
+
+                // If you return null then an error will be displayed advising the user to check their details.
+                return null;
             }
         })
     ]

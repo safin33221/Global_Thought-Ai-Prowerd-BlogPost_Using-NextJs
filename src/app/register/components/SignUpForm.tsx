@@ -25,13 +25,15 @@ const SignUpForm = () => {
     } = useForm<FormData>({ resolver: zodResolver(schema) });
 
     const onSubmit = async (data: FormData) => {
+        const signUP = toast.loading("SignUp.....")
         const result = await registerUser(data)
-  
+        console.log(result);
+
         if (result?.acknowledged === true) {
-            toast.success('user register success. Login Now!')
+            toast.success('user register success. Login Now!', { id: signUP })
             router.push('/login')
         } else {
-            toast.error(result && 'message' in result ? result.message : 'Registration failed')
+            toast.error(result && 'message' in result ? result.message : 'Registration failed', { id: signUP })
         }
 
 

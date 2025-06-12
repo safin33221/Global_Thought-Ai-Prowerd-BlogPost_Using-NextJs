@@ -14,7 +14,7 @@ const registerUser = async (payload: User) => {
     }
     const user = {
         ...payload,
-   
+
         role: payload.role ?? "USER",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -30,8 +30,8 @@ const registerUser = async (payload: User) => {
         result.insertedId.toString();
         return result;
     }
-    toast.error(`User with email ${email} already exists`);
-    return { acknowledged: false, message: "User already exists" };
+    
+    return { acknowledged: false, message: "User already registered" };
 }
 
 export default registerUser;

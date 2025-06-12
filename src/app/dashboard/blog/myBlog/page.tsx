@@ -11,9 +11,9 @@ import { BlogPost } from '@/types/types';
 
 const MyBlog = () => {
     const { userDetails } = useCurrentUserDetails()
-    // const [blogs, setBlogs] = useState<BlogPost[]>([])
 
-    const { data: blogs, isLoading, refetch } = useQuery({
+
+    const { data: blogs = [], isLoading, refetch, error } = useQuery<BlogPost[]>({
         queryKey: ['blog', userDetails?.email],
         enabled: !!userDetails?.email,
         queryFn: async () => {
@@ -21,19 +21,15 @@ const MyBlog = () => {
             return res?.data?.blogs
         }
     })
-    // useEffect(() => {
-    //     if (userDetails?.email) {
 
-    //         const getBLogData = async () => {
-    //             const res = await axios.get(`/api/blog/by-email/${userDetails?.email}`)
-    //             setBlogs(res?.data?.blogs);
-    //         }
-    //         getBLogData()
-    //     }
-    // }, [userDetails?.email])
 
     if (isLoading) return <Loader />
-
+    if (error)
+        return (
+            <div className="text-red-500">
+                Failed to load blogs. {error instanceof Error ? error.message : String(error)}
+            </div>
+        );
 
     return (
         <div>
