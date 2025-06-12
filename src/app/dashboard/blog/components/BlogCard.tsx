@@ -57,6 +57,28 @@ const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, 
             }
         }
     };
+
+    const handleDelete = async (id: string) => {
+        const deleteBlog = toast.loading("Deleting")
+        try {
+            const res = await axios.delete(`/api/blog/${id}`)
+            console.log(res);
+            if (res.status === 200 || !res.data.error) {
+                refetch()
+                toast.success("Delete Successful", { id: deleteBlog })
+
+
+            } else {
+                toast.error(res.data?.error || 'Something went wrong', { id: deleteBlog });
+            }
+
+        } catch (error) {
+            if (error) {
+                toast.error('Something went wrong', { id: deleteBlog });
+            }
+
+        }
+    }
     return (
         <div className=" rounded-xl shadow-md overflow-hidden max-w-md mx-auto" >
             <div className="relative">
@@ -67,13 +89,19 @@ const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, 
                     height={300}
                     className="object-cover w-full h-60"
                 />
+                <button type='button'
+                    onClick={() => handleDelete(_id)}
+                    className=' absolute  top-3  right-16 bg-black/80 text-red-500 p-2 rounded-full shadow text-sm'>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-trash2-icon lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
+                </button>
                 <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <Button
                             variant="ghost"
-                            className="absolute top-3 right-3 bg-white/80 hover:bg-white p-2 rounded-full shadow"
+                            className="absolute top-3 right-3 bg-black/80 hover:bg-black/80  p-2 rounded-full shadow"
                         >
-                            <Pencil className="w-5 h-5 text-gray-700" />
+                            <Pencil className="w-5 h-5 text-yellow-500 bg" />
                         </Button>
                     </DialogTrigger>
 
@@ -137,7 +165,7 @@ const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, 
 
             <div className="p-5">
                 <h3 className="text-xl font-semibold">{title}</h3>
-                <p className="text-sm text-gray-300 mt-1 line-clamp-3 whitespace-pre-line">
+                <p className="text-sm mt-1 line-clamp-3 whitespace-pre-line">
                     {content}
                 </p>
             </div>
@@ -153,7 +181,7 @@ const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, 
                     />
                     <div className="text-sm">
                         <p className="font-medium">By {author.name}</p>
-                        <p className=" text-gray-300 text-xs">
+                        <p className="  text-xs">
                             {new Date(createdAt).toLocaleDateString(undefined, {
                                 year: 'numeric',
                                 month: 'long',

@@ -39,3 +39,18 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     }
 
 }
+
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+    const { id } = params;
+    try {
+        const blogCollection = dbConnect(CollectionObjects.blogCollection)
+        await blogCollection.deleteOne({ _id: new ObjectId(id) })
+        return NextResponse.json({ message: "Deleted Success", }, { status: 200 })
+    } catch (error) {
+        if (error) {
+            return NextResponse.json({ message: "Server Error" }, { status: 500 })
+        }
+
+    }
+
+}
