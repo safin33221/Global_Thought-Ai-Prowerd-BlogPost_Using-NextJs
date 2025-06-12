@@ -14,6 +14,8 @@ import {
   CreditCard,
   HelpCircle,
   X,
+  Globe,
+  UserCircle,
 } from "lucide-react";
 import clsx from "clsx";
 
@@ -22,7 +24,7 @@ const menuItems = [
   { label: "My Posts", icon: FileText, href: "/dashboard/blog/myBlog", roles: ["USER", "ADMIN"] },
   { label: "Create Post", icon: PlusCircle, href: "/dashboard/blog/create", roles: ["USER", "ADMIN"] },
   { label: "Drafts", icon: Folder, href: "/dashboard/drafts", roles: ["USER", "ADMIN"] },
-  { label: "Profile", icon: User, href: "/dashboard/profile", roles: ["USER", "ADMIN"] },
+  
   // Admin-only
   { label: "All Posts", icon: Files, href: "/dashboard/posts", roles: ["ADMIN"] },
   { label: "Users", icon: Users, href: "/dashboard/users", roles: ["ADMIN"] },
@@ -31,10 +33,10 @@ const menuItems = [
 ];
 
 const otherItems = [
-  { label: "View site", icon: Settings, href: "/" },
+  { label: "View site", icon: Globe, href: "/" },
   { label: "Settings", icon: Settings, href: "/dashboard/settings" },
   { label: "Payment", icon: CreditCard, href: "/dashboard/payment" },
-  { label: "Accounts", icon: User, href: "/dashboard/profile" },
+  { label: "Accounts", icon: UserCircle, href: "/dashboard/profile" },
   { label: "Help", icon: HelpCircle, href: "/dashboard/help" },
 ];
 
