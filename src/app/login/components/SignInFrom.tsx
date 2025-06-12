@@ -61,7 +61,7 @@ const SignInFrom = () => {
 
     };
     return (
-        <div className="flex items-center  justify-center rounded-4xl shadow-cyan-50   p-16 bg-transparent backdrop-blur-lg">
+        <div className="flex items-center  justify-center rounded-2xl shadow-cyan-50  p-8 md:p-16 bg-transparent backdrop-blur-lg">
 
             <div className="w-full ">
                 <h2 className="text-3xl font-bold mb-6  text-center">Welcome Back 👋</h2>

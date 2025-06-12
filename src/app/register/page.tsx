@@ -44,11 +44,11 @@ export default function registerPage() {
                             ← Back to Home
                         </Link>
                     </div>
+
+                    {/* Right Side - Login Form */}
                     <SignUpForm />
                 </div>
             </div>
-
-            {/* Right Side - Login Form */}
         </motion.div>
     );
 }
