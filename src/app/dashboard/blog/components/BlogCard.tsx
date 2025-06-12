@@ -12,9 +12,12 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 
+interface BlogCardProps extends BlogPost {
+    refetch: () => void;
+}
 
 
-const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, status }: BlogPost) => {
+const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, status, refetch }: BlogCardProps) => {
     const [open, setOpen] = useState(false);
     const [editableBlog, setEditableBlog] = useState({
         title: title,
@@ -42,6 +45,7 @@ const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, 
             const res = await axios.put(`/api/blog/${_id}`, data);
 
             if (res.status === 200 && !res.data.error) {
+                refetch()
                 toast.success('Blog Updated', { id: toastId });
                 setOpen(false);
             } else {
