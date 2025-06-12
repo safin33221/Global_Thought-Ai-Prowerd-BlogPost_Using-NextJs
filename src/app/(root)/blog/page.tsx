@@ -15,7 +15,10 @@ const Blog = () => {
                 const res = await axios.get('/api/blog');
                 setBlogs(res.data.blogs);
             } catch (error) {
-                toast.error('Error fetching blogs:', error);
+                if (error) {
+
+                    toast.error('Error fetching blogs:', error);
+                }
             }
         };
         getData();
