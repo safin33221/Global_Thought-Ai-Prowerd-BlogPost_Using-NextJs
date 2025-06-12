@@ -43,6 +43,13 @@ export default function CreatePostPage() {
   const handleSubmit = async () => {
     if (!userDetails) return toast.error("User not found!");
 
+    if (!title || !content || !tags  || !links || !imageUrl) {
+      return toast.error('All filled are require')
+    }
+    if(content.length <250){
+      return toast.error("You have Write Content minimum 250 chart")
+    }
+
     const BlogData: BlogPost = {
       title,
       cover: imageUrl,
@@ -53,7 +60,7 @@ export default function CreatePostPage() {
         name: userDetails?.name,
         email: userDetails?.email,
         authorId: userDetails?._id ?? "",
-        avatarUrl: userDetails?.avatarUrl?? "",
+        avatarUrl: userDetails?.avatarUrl ?? "",
       },
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -61,12 +68,14 @@ export default function CreatePostPage() {
     };
     const res = await axios.post("/api/blog", BlogData);
     if (res.status === 201) {
+      toast.success("Blog published successfully");
       setTitle("");
       setContent("");
       setTags("");
       setLinks([]);
       setImageUrl("");
-      toast.success("Blog published successfully");
+      
+
     }
   };
 
@@ -87,6 +96,7 @@ export default function CreatePostPage() {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              required
               placeholder="Enter title"
               className="w-full p-3 border rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             />
@@ -100,6 +110,7 @@ export default function CreatePostPage() {
               type="text"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
+              required
               placeholder="e.g. React, TypeScript"
               className="w-full p-3 border rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             />
@@ -108,6 +119,7 @@ export default function CreatePostPage() {
             <Label htmlFor="picture">Picture</Label>
             <Input id="picture" type="file"
               onChange={handleFileChange} />
+            required
           </div>
         </div>
 
@@ -123,6 +135,7 @@ export default function CreatePostPage() {
                 placeholder="Label (e.g. GitHub)"
                 value={linkLabel}
                 onChange={(e) => setLinkLabel(e.target.value)}
+                required
                 className="flex-1 p-3 border rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />
               <input
@@ -130,6 +143,7 @@ export default function CreatePostPage() {
                 placeholder="https://example.com"
                 value={linkURL}
                 onChange={(e) => setLinkURL(e.target.value)}
+                required
                 className="flex-1 p-3 border rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />
               <button

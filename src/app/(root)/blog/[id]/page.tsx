@@ -1,42 +1,16 @@
 "use client"
 
-import Image from 'next/image';
+
 import React from 'react';
 
 const page = ({ params }: { params: { id: string } }) => {
-    const { id } = params
-    const featuredPosts = [
-        {
-            title: "The Rise of AI in Blogging",
-            image: "https://framerusercontent.com/images/RBpHBZtwSkU6uF9GENaXtaZ4ozU.png",
-            summary: "Explore how AI is transforming the way we write and discover content.",
-            slug: "rise-of-ai-in-blogging",
-            author: "Jane Doe",
-            date: "2025-01-01",
-        },
-        {
-            title: "Boost Productivity with GPT",
-            image: "https://www.growthbarseo.com/wp-content/uploads/2022/05/ai-blog-post-ideas-1-1024x1010.png",
-            summary: "Use AI tools to write faster and better.",
-            slug: "boost-productivity-gpt",
-            author: "John Smith",
-            date: "2025-02-01",
-        },
-        {
-            title: "Harnessing AI for Creative Writing",
-            image: "https://www.growthbarseo.com/wp-content/uploads/2022/05/ai-blog-post-ideas-1-1024x1010.png",
-            summary: "Use AI tools to write faster and better.",
-            slug: "harnessing-ai-creative-writing",
-            author: "Alice Johnson",
-            date: "2025-03-01",
-        },
-    ];
-    const details = featuredPosts.filter(post => post.slug === id)[0]
-    const { image, title, summary, date, author, slug } = details;
+    const { id } = params;
+    console.log(id);
+ 
 
     return (
         <div>
-            <div id='post-body' className="border rounded-lg flex-col overflow-hidden shadow-md max-w-5xl m-auto items-center justify-center  ">
+            {/* <div id='post-body' className="border rounded-lg flex-col overflow-hidden shadow-md max-w-5xl m-auto items-center justify-center  ">
 
                 {image && (
                     <Image
@@ -65,7 +39,7 @@ const page = ({ params }: { params: { id: string } }) => {
 
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

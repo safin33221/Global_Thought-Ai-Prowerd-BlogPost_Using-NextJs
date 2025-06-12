@@ -20,7 +20,7 @@ const BlogCard = ({ title, content, author, cover, createdAt, _id }: BlogPost) =
             )}
             <div className="p-4">
                 <h3 className="text-lg font-semibold">{title}</h3>
-                <p className="text-sm text-muted-foreground">{content}</p>
+                <p className="text-sm text-muted-foreground">{content?.slice(0,250)}...</p>
             </div>
             <div className="border-t">
                 <div className="flex items-center justify-between p-4">
