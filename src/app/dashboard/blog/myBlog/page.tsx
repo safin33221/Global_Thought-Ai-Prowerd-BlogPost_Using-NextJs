@@ -1,9 +1,11 @@
 "use client"
-import BlogCard from '@/app/components/BlogCard';
+
 import { useCurrentUserDetails } from '@/Hook/useCurrentUserDetails';
 import { BlogPost } from '@/types/types';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import BlogCard from '../components/BlogCard';
+import Loader from '@/app/components/Loader';
 
 const MyBlog = () => {
     const { userDetails } = useCurrentUserDetails()
@@ -18,6 +20,8 @@ const MyBlog = () => {
             getBLogData()
         }
     }, [userDetails?.email])
+
+    if(!blogs) return <Loader/>
 
 
     return (
