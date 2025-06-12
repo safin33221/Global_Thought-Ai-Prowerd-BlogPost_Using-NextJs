@@ -9,11 +9,14 @@ const MyBlog = () => {
     const { userDetails } = useCurrentUserDetails()
     const [blogs, setBlogs] = useState<BlogPost[]>([])
     useEffect(() => {
-        const getBLogData = async () => {
-            const res = await axios.get(`/api/blog/by-email/${userDetails?.email}`)
-            setBlogs(res?.data?.blogs);
+        if (userDetails?.email) {
+
+            const getBLogData = async () => {
+                const res = await axios.get(`/api/blog/by-email/${userDetails?.email}`)
+                setBlogs(res?.data?.blogs);
+            }
+            getBLogData()
         }
-        getBLogData()
     }, [userDetails?.email])
 
 
