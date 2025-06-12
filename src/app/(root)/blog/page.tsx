@@ -4,6 +4,7 @@ import { BlogPost } from '@/types/types';
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const Blog = () => {
     const [blogs, setBlogs] = useState<BlogPost[]>([]);
@@ -14,7 +15,7 @@ const Blog = () => {
                 const res = await axios.get('/api/blog');
                 setBlogs(res.data.blogs);
             } catch (error) {
-                console.error('Error fetching blogs:', error);
+                toast.error('Error fetching blogs:', error);
             }
         };
         getData();

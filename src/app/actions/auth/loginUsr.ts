@@ -12,7 +12,7 @@ const loginUser = async (payload: loginPayload) => {
     const userCollection = await dbConnect(CollectionObjects.userCollection)
     const user = await userCollection.findOne({ email })
     if (!user) {
-        console.log(`User with email ${email} does not exist`);
+        toast.error(`User with email ${email} does not exist`);
         return;
     }
     const isPasswordValid = await bcrypt.compare(password, user.password)

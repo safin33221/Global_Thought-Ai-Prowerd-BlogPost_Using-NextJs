@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, { params }: { params: { email: string } }) {
     const { email } = params;
-    console.log(email);
     const blogCollection = await dbConnect(CollectionObjects.blogCollection)
     if (!email) {
         return NextResponse.json({ error: 'Email is required' }, { status: 400 });

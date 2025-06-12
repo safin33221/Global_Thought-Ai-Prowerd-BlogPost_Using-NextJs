@@ -22,8 +22,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
     const { id } = params;
     const data = await req.json();
-    console.log(id);
-    console.log(data);
+
 
     try {
         const blogCollection = await dbConnect(CollectionObjects.blogCollection)

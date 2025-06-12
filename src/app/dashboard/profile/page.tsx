@@ -15,7 +15,6 @@ const ProfilePage = () => {
     const { userDetails, isLoading } = useCurrentUserDetails();
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [imageFile, setImageFile] = useState<File | null>(null);
-    console.log("pres ----------", previewUrl);
     const handleEditClick = () => {
         fileInputRef.current?.click();
     };

@@ -26,8 +26,7 @@ export async function GET(req: Request) {
     const blogCollection = await dbConnect(CollectionObjects.blogCollection);
     try {
         const blogs = await blogCollection.find({}).toArray();
-        console.log(blogs);
-        
+    
         return NextResponse.json({ success: true, blogs }, { status: 200 });
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : "Unknown Error";

@@ -10,6 +10,7 @@ import SectionTitle from "./SectionTitle";
 import axios from "axios";
 import { BlogPost } from "@/types/types";
 import Loader from "./Loader";
+import toast from "react-hot-toast";
 
 const FeatureBlog = () => {
     const [blogs, setBlogs] = useState<BlogPost[]>([]);
@@ -20,7 +21,7 @@ const FeatureBlog = () => {
                 const res = await axios.get('/api/blog');
                 setBlogs(res.data.blogs);
             } catch (error) {
-                console.error('Error fetching blogs:', error);
+                toast.error('Error fetching blogs:', error);
             }
         };
         getData();

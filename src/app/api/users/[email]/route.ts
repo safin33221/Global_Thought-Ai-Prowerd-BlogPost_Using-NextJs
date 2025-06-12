@@ -25,8 +25,7 @@ export async function PUT(req: NextRequest, { params }: { params: { email: strin
     const userCollection = await dbConnect(CollectionObjects.userCollection)
     const { email } = params;
     const { url } = await req.json();
-    console.log(email);
-    console.log(url);
+
 
     try {
 
@@ -40,7 +39,7 @@ export async function PUT(req: NextRequest, { params }: { params: { email: strin
                 { email },
                 { $set: { avatarUrl: url } }
             );
-            console.log(updateResult);
+    
             if (updateResult.matchedCount === 0) {
                 return NextResponse.json({ message: "User not found" }, { status: 404 });
             }

@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const registerUser = async (payload: User) => {
     const { name, email, password } = payload;
-    console.log(name, email);
+
 
     if (!name || !email || !password) {
         toast.error("All fields are required");
@@ -30,7 +30,7 @@ const registerUser = async (payload: User) => {
         result.insertedId.toString();
         return result;
     }
-    console.log(`User with email ${email} already exists`);
+    toast.error(`User with email ${email} already exists`);
     return { acknowledged: false, message: "User already exists" };
 }
 

@@ -62,7 +62,7 @@ const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, 
         const deleteBlog = toast.loading("Deleting")
         try {
             const res = await axios.delete(`/api/blog/${id}`)
-            console.log(res);
+     
             if (res.status === 200 || !res.data.error) {
                 refetch()
                 toast.success("Delete Successful", { id: deleteBlog })
