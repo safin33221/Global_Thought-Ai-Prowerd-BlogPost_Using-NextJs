@@ -53,12 +53,12 @@ const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, 
             }
         } catch (error) {
             if (error) {
-                toast.error(error?.message || 'Something went wrong', { id: toastId });
+                toast.error('Something went wrong', { id: toastId });
             }
         }
     };
     return (
-        <div className="bg-white rounded-xl shadow-md overflow-hidden max-w-md mx-auto" >
+        <div className=" rounded-xl shadow-md overflow-hidden max-w-md mx-auto" >
             <div className="relative">
                 <Image
                     src={cover}
@@ -137,7 +137,7 @@ const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, 
 
             <div className="p-5">
                 <h3 className="text-xl font-semibold">{title}</h3>
-                <p className="text-sm text-gray-600 mt-1 line-clamp-3 whitespace-pre-line">
+                <p className="text-sm text-gray-300 mt-1 line-clamp-3 whitespace-pre-line">
                     {content}
                 </p>
             </div>
@@ -153,7 +153,7 @@ const BlogCard = ({ title, content, author, cover, createdAt, links, tags, _id, 
                     />
                     <div className="text-sm">
                         <p className="font-medium">By {author.name}</p>
-                        <p className="text-muted-foreground text-xs">
+                        <p className=" text-gray-300 text-xs">
                             {new Date(createdAt).toLocaleDateString(undefined, {
                                 year: 'numeric',
                                 month: 'long',
