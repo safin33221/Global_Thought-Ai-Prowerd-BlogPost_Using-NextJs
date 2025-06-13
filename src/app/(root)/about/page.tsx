@@ -11,7 +11,7 @@ export default function AboutThoughtPage() {
         </p>
       </section>
 
-      <div className="shrink-0 bg-border h-[1px] w-full my-4 dark:bg-gray-700" />
+      <div className="shrink-0 bg-border h-[1px] w-full my-4 " />
 
       {/* Mission & Vision */}
       <section className="max-w-6xl mx-auto grid gap-10 md:grid-cols-2 px-2">
@@ -31,7 +31,7 @@ export default function AboutThoughtPage() {
         </div>
       </section>
 
-      <div className="shrink-0 bg-border h-[1px] w-full my-4 dark:bg-gray-700" />
+      <div className="shrink-0 bg-border h-[1px] w-full my-4 " />
 
       {/* Features */}
       <section className="max-w-6xl mx-auto px-2 space-y-6">
@@ -52,7 +52,7 @@ export default function AboutThoughtPage() {
         </div>
       </section>
 
-      <div className="shrink-0 bg-border h-[1px] w-full my-4 dark:bg-gray-700" />
+      <div className="shrink-0 bg-border h-[1px] w-full my-4 " />
 
       {/* Team */}
       <section className="max-w-6xl mx-auto px-2 space-y-4">
@@ -76,7 +76,7 @@ export default function AboutThoughtPage() {
         </div>
       </section>
 
-      <div className="shrink-0 bg-border h-[1px] w-full my-4 dark:bg-gray-700" />
+      <div className="shrink-0 bg-border h-[1px] w-full my-4 " />
 
       {/* FAQs */}
       <section className="max-w-6xl mx-auto px-2 space-y-6">
@@ -97,7 +97,7 @@ export default function AboutThoughtPage() {
         </div>
       </section>
 
-      <div className="shrink-0 bg-border h-[1px] w-full my-4 dark:bg-gray-700" />
+      <div className="shrink-0 bg-border h-[1px] w-full my-4 " />
 
       {/* CTA */}
       <section className="max-w-6xl mx-auto px-2 text-center space-y-4">
