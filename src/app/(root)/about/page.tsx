@@ -58,7 +58,7 @@ export default function AboutThoughtPage() {
       <section className="max-w-6xl mx-auto px-2 space-y-4">
         <h2 className="text-2xl font-semibold text-center">Meet the Team</h2>
         <p className="text-center text-muted-foreground dark:text-gray-400">
-          We're a small team of designers, developers, and thinkers who believe in the power of the written word.
+          We are a small team of designers, developers, and thinkers who believe in the power of the written word.
         </p>
         <div className="grid md:grid-cols-3 gap-6 text-center">
           <div>
