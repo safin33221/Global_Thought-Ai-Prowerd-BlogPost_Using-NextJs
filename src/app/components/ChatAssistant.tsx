@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import toast, { ToastIcon } from "react-hot-toast";
 
 const customQs = [
     "How to write a blog post?",
@@ -47,8 +48,8 @@ const ChatAssistant = () => {
             console.log(res);
 
             let botReply: string = data.content || "";
-            if (botReply.length > 5000) {
-                botReply = botReply.slice(0, 5000) + "…";
+            if (botReply.length > 10000) {
+                botReply = botReply.slice(0, 10000) + "…";
             }
 
             let currentText = "";
@@ -68,7 +69,7 @@ const ChatAssistant = () => {
             });
         } catch (error) {
             if (error) {
-                console.log(error);
+                toast.error(error?.message);
             }
             setChats((prev) => [...prev, { sender: "bot", message: "Error fetching response!" }]);
         } finally {
@@ -91,7 +92,7 @@ const ChatAssistant = () => {
         <>
             <Button
                 onClick={() => setIsOpen(true)}
-                className="fixed bottom-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg px-5 py-3"
+                className="fixed  bottom-10 right-12 text-lg z-50 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg px-5 py-3"
             >
                 Help 💬
             </Button>
