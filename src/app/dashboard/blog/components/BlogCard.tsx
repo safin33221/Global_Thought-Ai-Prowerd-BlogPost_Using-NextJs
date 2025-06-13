@@ -168,7 +168,7 @@ const BlogCard = ({
                 </div>
             </div>
             {open && (
-                <div className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center overflow-y-auto">
+                <div className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center h-full overflow-y-scroll">
                     <div className="bg-white max-w-4xl w-full mx-4 md:mx-auto rounded-xl shadow-lg p-6 relative">
                         <button
                             className="absolute top-3 right-3 text-gray-600 hover:text-black"
@@ -242,12 +242,12 @@ const BlogCard = ({
                                     </div>
                                 ))}
                             </div>
-                            <div className='flex gap-5 w-full'>
+                            <div className='flex gap-5 w-full justify-end'>
 
-                            <Button type="button" onClick={handleUpdate}>
+                            <Button type="button" className='' onClick={handleUpdate}>
                                 Save Changes
                             </Button >
-                            <Button onClick={() => setOpen(false)}>
+                            <Button type='button' className='' onClick={() => setOpen(false)}>
                                 Cancel
                             </Button>
                             </div>
