@@ -7,7 +7,7 @@ import React from 'react';
 
 const BlogCard = ({ title, content, author, cover, createdAt, _id }: BlogPost) => {
     return (
-        <div id='post-body' className="border rounded-lg overflow-hidden shadow-md ">
+        <div id='post-body' className="border rounded-lg overflow-hidden shadow-md bg-card ">
 
             {cover && (
                 <Image
