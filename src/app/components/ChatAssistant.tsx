@@ -18,7 +18,7 @@ const ChatAssistant = () => {
     const [chats, setChats] = useState([
         { sender: "bot", message: "Hello! How can I assist you today?" },
     ]);
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const abortRef = useRef(false);
     const chatRef = useRef<HTMLDivElement>(null);
 
@@ -35,7 +35,7 @@ const ChatAssistant = () => {
 
     const sendMessage = async (message: string) => {
         setChats((prev) => [...prev, { sender: "user", message }]);
-        setLoading(true);
+        // setLoading(true);
         abortRef.current = false;
 
         try {
@@ -69,11 +69,11 @@ const ChatAssistant = () => {
             });
         } catch (error) {
             if (error) {
-                toast.error(error?.message);
+                toast.error((error as Error).message);
             }
             setChats((prev) => [...prev, { sender: "bot", message: "Error fetching response!" }]);
         } finally {
-            setLoading(false);
+            // setLoading(false);
         }
     };
 
@@ -173,7 +173,7 @@ const ChatAssistant = () => {
                                         <button
                                             type="button"
                                             onClick={() => (abortRef.current = true)}
-                                            className="absolute right-2  text-md top-[14%] bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
+                                            className="absolute right-2  text-md top-[14%] bg-blue-500 text-white p-2 rounded-full hover:bg-indigo-600"
                                         >
                                             stop
                                         </button>
@@ -181,7 +181,7 @@ const ChatAssistant = () => {
                                         (
                                             <button
                                                 type="submit"
-                                                className="absolute right-2 top-[14%] bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
+                                                className="absolute right-2 top-[14%] bg-indigo-600 text-white p-2 rounded-full hover:bg-blue-600"
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"

@@ -67,7 +67,7 @@ const BlogCard = ({
                 });
             }
         } catch (error) {
-            if(error){
+            if (error) {
 
                 toast.error('Something went wrong', { id: toastId });
             }
@@ -108,7 +108,7 @@ const BlogCard = ({
                     />
                     <button
                         type="button"
-                        onClick={() => handleDelete(_id)}
+                        onClick={() => handleDelete(_id || '')}
                         className="absolute top-3 right-16 bg-black/80 text-red-500 p-2 rounded-full shadow text-sm"
                     >
                         <svg

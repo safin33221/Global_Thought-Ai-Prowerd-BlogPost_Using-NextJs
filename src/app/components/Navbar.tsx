@@ -2,7 +2,7 @@
 import { useTheme } from "next-themes"
 import * as React from "react"
 import Link from "next/link"
-import { MenuIcon, XIcon, CircleCheckIcon, CircleHelpIcon, CircleIcon, User, Laptop } from "lucide-react"
+import { MenuIcon, XIcon, CircleCheckIcon, CircleHelpIcon, CircleIcon, User } from "lucide-react"
 import { Moon, Sun } from "lucide-react"
 
 import {

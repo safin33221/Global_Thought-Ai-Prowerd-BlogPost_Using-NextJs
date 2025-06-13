@@ -31,11 +31,11 @@ export default function AIBlogGeneratorPage() {
             if (!res.ok) throw new Error(data.error || 'AI failed to generate content');
 
             setAiResponse(data.content);
-        } catch (err) {
-  
+        } catch (error) {
 
-                setError(err?.message);
-            
+
+            setError((error as Error).message);
+
         } finally {
             setLoading(false);
         }
