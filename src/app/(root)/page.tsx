@@ -4,6 +4,7 @@
 import React from 'react';
 import BlogPostHero from '../components/BlogPostHero';
 import FeatureBlog from '../components/FeatureBlog';
+import AiShowcase from '../components/AiShowcase';
 
 
 const page = () => {
@@ -23,7 +24,10 @@ const page = () => {
         tags={["AI", "Content", "Blogging"]}
       />
 
-      <FeatureBlog/>
+      <div className='container'>
+        <FeatureBlog />
+        <AiShowcase />
+      </div>
 
     </div>
   );

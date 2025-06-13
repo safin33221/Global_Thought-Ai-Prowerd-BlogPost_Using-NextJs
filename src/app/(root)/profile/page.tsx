@@ -48,22 +48,22 @@ const ProfilePage = () => {
     if (isLoading) return <Loader />;
 
     return (
-        <div className="min-h-fit mt-20 flex items-center justify-center p-4">
-            <div className="w-full max-w-3xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-2xl shadow-xl p-6 relative transition-all duration-300">
+        <div className="min-h-fit mt-10 md:mt-20 flex items-center justify-center p-4">
+            <div className="w-full max-w-3xl  bg-card text-gray-800 dark:text-gray-100 rounded-2xl shadow-xl p-6 relative transition-all duration-300">
 
                 {/* Profile Header */}
-                <div className="flex items-center gap-4 mb-6">
+                <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
                     <div className="relative">
                         <Image
                             src={previewUrl ? previewUrl : userDetails?.avatarUrl || "https://i.pravatar.cc/100"}
                             alt="Profile"
-                            className="w-24 h-24 rounded-full object-cover ring-2 ring-blue-500"
+                            className="w-42 h-42 md:w-24 md:h-24 rounded-full object-cover bg-cover ring-2 ring-blue-500"
                             width={96}
                             height={96}
                         />
                         <button
                             onClick={handleEditClick}
-                            className="absolute bottom-0 right-0 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-full p-1 hover:bg-gray-100 dark:hover:bg-gray-600 transition"
+                            className="absolute bottom-1 right-3  md:bottom-0 md:right-0 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-600 transition"
                             aria-label="Edit"
                         >
                             <Pencil size={14} className="text-gray-600 dark:text-gray-300" />

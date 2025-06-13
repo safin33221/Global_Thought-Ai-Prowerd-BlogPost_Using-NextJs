@@ -44,6 +44,7 @@ const otherItems = [
 import React from 'react';
 import Link from "next/link";
 import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails";
+import ThemeToggle from "@/components/ThemeToggle";
 
 
 const DashboardAside = () => {
@@ -129,6 +130,9 @@ const DashboardAside = () => {
 
         </div>
         <div>
+         <div className="flex items-center justify-center">
+           <ThemeToggle/>
+         </div>
 
           <div className="space-y-1">
             {otherItems.map(renderLink)}

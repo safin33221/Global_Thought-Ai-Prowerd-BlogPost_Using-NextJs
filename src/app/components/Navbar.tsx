@@ -1,9 +1,9 @@
 "use client"
-import { useTheme } from "next-themes"
+
 import * as React from "react"
 import Link from "next/link"
 import { MenuIcon, XIcon, CircleCheckIcon, CircleHelpIcon, CircleIcon, User } from "lucide-react"
-import { Moon, Sun } from "lucide-react"
+
 
 import {
     NavigationMenu,
@@ -14,7 +14,7 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { Button } from "@/components/ui/button"
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -32,6 +32,7 @@ import {
 import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails"
+import ThemeToggle from "../../components/ThemeToggle"
 
 
 
@@ -76,23 +77,8 @@ const components = [
 export function NavigationMenuDemo() {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
     const { userDetails } = useCurrentUserDetails()
-
-
     const session = useSession()
-    const { setTheme, theme, systemTheme } = useTheme();
-    const [currentTheme, setCurrentTheme] = React.useState("system");
 
-
-    React.useEffect(() => {
-        const resolved = theme === "system" ? systemTheme : theme;
-        setCurrentTheme(resolved || "light");
-    }, [theme, systemTheme]);
-
-    const toggleTheme = () => {
-        const next =
-            theme === "light" ? "dark" : "light";
-        setTheme(next);
-    };
 
 
     return (
@@ -235,30 +221,7 @@ export function NavigationMenuDemo() {
 
             </div>
             <div className="flex items-center justify-center">
-                <div className="   md:flex gap-3 items-center ">
-                    <div className="p-2
-                     md:flex gap-3 items-center">
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={toggleTheme}
-                            className="relative"
-                        >
-
-                            <Sun
-                                className={`h-[1.2rem] w-[1.2rem] transition-all ${currentTheme === "light" ? "opacity-0" : "opacity-100"}`}
-                            />
-
-                            <Moon
-                                className={`absolute h-[1.2rem] w-[1.2rem] transition-all ${currentTheme === "dark" ? "opacity-0" : "opacity-100"}`}
-                            />
-
-
-
-                            <span className="sr-only">Toggle theme</span>
-                        </Button>
-                    </div>
-                </div>
+                <ThemeToggle />
                 <div >
                     {
                         session.status === "authenticated" ? (
@@ -272,7 +235,7 @@ export function NavigationMenuDemo() {
                                                 alt="Profile"
                                                 width={20}
                                                 height={20}
-                                                className="w-12 h-12 rounded-full bg-cover object-center"
+                                                className="w-12 h-12 rounded-full object-cover bg-cover object-center"
                                             />
                                         ) : (
                                             <User className="w-12 h-12 rounded-full bg-gray-200 p-2" />
