@@ -29,7 +29,7 @@ const page = () => {
       <section id="intro" className="mb-10">
         <h2 className="text-2xl font-semibold mb-2">🚀 Introduction</h2>
         <p>
-          <strong>ThinkPost: Global Thought</strong> is a powerful blogging platform where creators can publish, manage,
+          <strong>Global Thought: Global Thought</strong> is a powerful blogging platform where creators can publish, manage,
           and share their ideas globally. Built with performance and scalability in mind, it supports secure auth,
           dynamic blog features, and elegant design.
         </p>

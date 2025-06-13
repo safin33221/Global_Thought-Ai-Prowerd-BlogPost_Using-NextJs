@@ -23,7 +23,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Global Thought",
   description: "Global Thought is a platform designed to help you organize your thoughts and ideas effectively. Whether you are brainstorming, planning, or just jotting down notes, Global Thought provides the tools you need to stay organized and focused.",
-  icons: '../../public/images/heroBackground.jpg'
+  icons: {
+    icon: '/public/images/heroBackground.jpg'
+  }
 };
 
 

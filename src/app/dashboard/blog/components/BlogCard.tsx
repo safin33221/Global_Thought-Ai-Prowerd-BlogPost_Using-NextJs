@@ -67,7 +67,10 @@ const BlogCard = ({
                 });
             }
         } catch (error) {
-            toast.error('Something went wrong', { id: toastId });
+            if(error){
+
+                toast.error('Something went wrong', { id: toastId });
+            }
         }
     };
 
@@ -85,7 +88,10 @@ const BlogCard = ({
                 });
             }
         } catch (error) {
-            toast.error('Something went wrong', { id: deleteBlog });
+            if (error) {
+
+                toast.error('Something went wrong', { id: deleteBlog });
+            }
         }
     };
 
@@ -244,12 +250,12 @@ const BlogCard = ({
                             </div>
                             <div className='flex gap-5 w-full justify-end'>
 
-                            <Button type="button" className='' onClick={handleUpdate}>
-                                Save Changes
-                            </Button >
-                            <Button type='button' className='' onClick={() => setOpen(false)}>
-                                Cancel
-                            </Button>
+                                <Button type="button" className='' onClick={handleUpdate}>
+                                    Save Changes
+                                </Button >
+                                <Button type='button' className='' onClick={() => setOpen(false)}>
+                                    Cancel
+                                </Button>
                             </div>
                         </div>
                     </div>
