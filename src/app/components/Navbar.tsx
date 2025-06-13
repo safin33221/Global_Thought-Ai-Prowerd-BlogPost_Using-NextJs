@@ -1,9 +1,9 @@
 "use client"
-import { useTheme } from "next-themes"
+
 import * as React from "react"
 import Link from "next/link"
 import { MenuIcon, XIcon, CircleCheckIcon, CircleHelpIcon, CircleIcon, User } from "lucide-react"
-import { Moon, Sun } from "lucide-react"
+
 
 import {
     NavigationMenu,
@@ -14,7 +14,7 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { Button } from "@/components/ui/button"
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -32,6 +32,7 @@ import {
 import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails"
+import ThemeToggle from "../../components/ThemeToggle"
 
 
 
@@ -76,9 +77,9 @@ const components = [
 export function NavigationMenuDemo() {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
     const { userDetails } = useCurrentUserDetails()
-
-    const { setTheme } = useTheme()
     const session = useSession()
+
+
 
     return (
         <div className="container mx-auto px-4 py-2 flex items-center justify-between">
@@ -86,11 +87,11 @@ export function NavigationMenuDemo() {
                 <button className=" md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                     {mobileMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
                 </button>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                <h1 className="text-xl md:text-2xl  font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                     Global Thought
                 </h1>
                 {mobileMenuOpen && (
-                    <div className="    absolute top-16 left-0 right-0  backdrop-blur-2xl   z-50 flex flex-col p-4 shadow-md space-y-4 md:hidden">
+                    <div className="    absolute top-16 left-0 right-0  backdrop-blur-2xl   z-50 flex flex-col p-2 shadow-md space-y-4 md:hidden">
                         <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
                         <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
                         <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
@@ -220,26 +221,7 @@ export function NavigationMenuDemo() {
 
             </div>
             <div className="flex items-center justify-center">
-                <div className="  p-3 md:flex gap-3 items-center ">
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="icon">
-                                <Sun className="h-[1.2rem]  w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-                                <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-                                <span className="sr-only">Toggle theme</span>
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => setTheme("light")}>
-                                Light
-                            </DropdownMenuItem>
-
-                            <DropdownMenuItem onClick={() => setTheme("system")}>
-                                dark
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                </div>
+                <ThemeToggle />
                 <div >
                     {
                         session.status === "authenticated" ? (
@@ -253,7 +235,7 @@ export function NavigationMenuDemo() {
                                                 alt="Profile"
                                                 width={20}
                                                 height={20}
-                                                className="w-12 h-12 rounded-full bg-cover object-center"
+                                                className="w-12 h-12 rounded-full object-cover bg-cover object-center"
                                             />
                                         ) : (
                                             <User className="w-12 h-12 rounded-full bg-gray-200 p-2" />

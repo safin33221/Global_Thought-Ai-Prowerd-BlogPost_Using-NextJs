@@ -26,14 +26,14 @@ export default function BlogPostHero({
     tags = [],
 }: BlogPostHeroProps) {
     return (
-        <header className="relative isolate w-full overflow-hidden bg-cover min-h-[80vh] bg-gray-900 text-white">
+        <header className="relative isolate w-full overflow-hidden bg-cover   max-h-[600px] bg-gray-900 text-white">
             {/* Background Image */}
             <Image
                 src={coverUrl}
                 alt={title}
                 fill
                 priority
-                className="w-full  object-center object-cover  bg-center opacity-90"
+                className="w-full   object-cover bg-cover object-center  bg-center opacity-60"
             />
 
             {/* Overlay */}
@@ -49,20 +49,20 @@ export default function BlogPostHero({
                 </p>
 
                 {/* Meta */}
-                <div className="mt-6 flex items-center gap-3 text-sm text-slate-300">
+                {/* <div className="mt-6 flex items-center gap-3 text-sm text-slate-300">
                     <Image
                         src={author.avatar}
                         alt={author.name}
                         width={40}
                         height={40}
-                        className="rounded-full border border-white/20"
+                        className="rounded-full border bg-cover object-cover border-white/20"
                     />
                     <span>{author.name}</span>
                     <span className="opacity-50">•</span>
                     <time dateTime={publishedAt}>{publishedAt}</time>
                     <span className="opacity-50">•</span>
-                    <span>{readTime}</span>
-                </div>
+                    <span >{readTime}</span>
+                </div> */}
 
                 {/* Tags */}
                 {tags.length > 0 && (

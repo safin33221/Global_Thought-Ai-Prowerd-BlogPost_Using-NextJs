@@ -67,7 +67,7 @@ const BlogCard = ({
                 });
             }
         } catch (error) {
-            if(error){
+            if (error) {
 
                 toast.error('Something went wrong', { id: toastId });
             }
@@ -97,7 +97,7 @@ const BlogCard = ({
 
     return (
         <div>
-            <div className="rounded-xl shadow-md overflow-hidden max-w-md mx-auto h-full flex flex-col justify-between ">
+            <div className="rounded-xl dark:bg-zinc-900 shadow-md overflow-hidden max-w-md mx-auto h-full flex flex-col justify-between ">
                 <div className="relative">
                     <Image
                         src={cover}
@@ -108,7 +108,7 @@ const BlogCard = ({
                     />
                     <button
                         type="button"
-                        onClick={() => handleDelete(_id)}
+                        onClick={() => handleDelete(_id || '')}
                         className="absolute top-3 right-16 bg-black/80 text-red-500 p-2 rounded-full shadow text-sm"
                     >
                         <svg
@@ -174,8 +174,8 @@ const BlogCard = ({
                 </div>
             </div>
             {open && (
-                <div className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center h-full overflow-y-scroll">
-                    <div className="bg-white max-w-4xl w-full mx-4 md:mx-auto rounded-xl shadow-lg p-6 relative">
+                <div className="fixed inset-0 bg-black/50  z-[9999] flex items-center justify-center ">
+                    <div className="bg-white max-w-4xl h-11/12 overflow-y-scroll dark:bg-zinc-900 w-full mx-4 md:mx-auto rounded-xl shadow-lg p-6 relative">
                         <button
                             className="absolute top-3 right-3 text-gray-600 hover:text-black"
                             onClick={() => setOpen(false)}
@@ -196,6 +196,7 @@ const BlogCard = ({
                                 rows={5}
                                 placeholder="Content"
                                 value={editableBlog.content}
+                                className='overflow-y-scroll max-h-[200px]'
                                 onChange={(e) =>
                                     setEditableBlog({
                                         ...editableBlog,
