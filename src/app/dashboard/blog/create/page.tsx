@@ -80,8 +80,8 @@ export default function CreatePostPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg mt-12 transition-colors duration-500">
-      <h1 className="text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-8">
+    <div className="max-w-6xl mx-auto p-8 dark:bg-zinc-900 rounded-xl shadow-lg mt-12 transition-colors duration-500">
+      <h1 className="text-4xl font-extrabold text-center text-zinc-900 dark:text-white mb-8">
         Create Blog Post
       </h1>
 
@@ -89,7 +89,7 @@ export default function CreatePostPage() {
         {/* Left Side: Title + Tags */}
         <div className="space-y-4">
           <label>
-            <span className="block font-semibold text-gray-700 dark:text-gray-300 mb-1">
+            <span className="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
               Post Title
             </span>
             <input
@@ -98,12 +98,12 @@ export default function CreatePostPage() {
               onChange={(e) => setTitle(e.target.value)}
               required
               placeholder="Enter title"
-              className="w-full p-3 border rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+              className="w-full p-3 border rounded-lg bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
             />
           </label>
 
           <label>
-            <span className="block font-semibold text-gray-700 dark:text-gray-300 mb-1">
+            <span className="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
               Tags (comma-separated)
             </span>
             <input
@@ -112,7 +112,7 @@ export default function CreatePostPage() {
               onChange={(e) => setTags(e.target.value)}
               required
               placeholder="e.g. React, TypeScript"
-              className="w-full p-3 border rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+              className="w-full p-3 border rounded-lg bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
             />
           </label>
           <div className="grid w-full p-2 items-center gap-3">
@@ -126,7 +126,7 @@ export default function CreatePostPage() {
         {/* Right Side: Resource Links */}
         <div className="space-y-4">
           <label>
-            <span className="block font-semibold text-gray-700 dark:text-gray-300 mb-1">
+            <span className="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
               Add Resource Link
             </span>
             <div className="flex flex-col md:flex-row gap-3">
@@ -136,7 +136,7 @@ export default function CreatePostPage() {
                 value={linkLabel}
                 onChange={(e) => setLinkLabel(e.target.value)}
                 required
-                className="flex-1 p-3 border rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                className="flex-1 p-3 border rounded-lg bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
               />
               <input
                 type="url"
@@ -144,7 +144,7 @@ export default function CreatePostPage() {
                 value={linkURL}
                 onChange={(e) => setLinkURL(e.target.value)}
                 required
-                className="flex-1 p-3 border rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                className="flex-1 p-3 border rounded-lg bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
               />
               <button
                 onClick={handleAddLink}
@@ -161,7 +161,7 @@ export default function CreatePostPage() {
               {links.map((link, i) => (
                 <div
                   key={i}
-                  className="relative p-2 border rounded-lg bg-gray-100 dark:bg-gray-800 shadow-sm"
+                  className="relative p-2 border rounded-lg bg-zinc-100 dark:bg-zinc-800 shadow-sm"
                 >
                   <button
                     onClick={() => {
@@ -175,7 +175,7 @@ export default function CreatePostPage() {
                     <X size={18} />
                   </button>
                   <div className="flex items-center gap-3">
-                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                    <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                       {link.label}:
                     </p>
                     <a
@@ -197,7 +197,7 @@ export default function CreatePostPage() {
 
       {/* Content Full Width */}
       <label className="block mb-6">
-        <span className="text-gray-700 dark:text-gray-300 font-semibold mb-1 block">
+        <span className="text-zinc-700 dark:text-zinc-300 font-semibold mb-1 block">
           Content
         </span>
         <textarea
@@ -205,7 +205,7 @@ export default function CreatePostPage() {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           rows={12}
-          className="w-full p-3 border rounded-lg resize-y bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+          className="w-full p-3 border rounded-lg resize-y bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
         />
       </label>
 
