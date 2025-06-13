@@ -92,25 +92,25 @@ const ChatAssistant = () => {
         <>
             <Button
                 onClick={() => setIsOpen(true)}
-                className="fixed  bottom-10 right-12 text-lg z-50 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg px-5 py-3"
+                className="fixed  bottom-10 right-12 text-lg z-50   bg-blue-500 text-white dark:bg-zinc-900 rounded-full shadow-lg px-5 py-3"
             >
                 Help 💬
             </Button>
 
             {isOpen && (
-                <div className="bg-white md:rounded-xl shadow-lg border-2 md:border-blue-500 fixed inset-0 md:inset-auto md:bottom-0 md:right-0 md:m-5 w-full h-full md:w-[350px] md:h-[550px] z-[500] transition-all duration-300">
-                    <div className="flex justify-between items-center px-5 m-3">
+                <div className="bg-white dark:bg-zinc-950  md:rounded-xl shadow-lg border-2  fixed inset-0 md:inset-auto md:bottom-0 md:right-0 md:m-5 w-full h-full md:w-[350px] md:h-[550px] z-[500] transition-all duration-300">
+                    <div className="flex justify-between items-center px-1 m-1">
                         <div
                             onClick={() => setIsOpen(false)}
-                            className="p-2 rounded-full bg-blue-500 text-white cursor-pointer"
+                            className="p-2 rounded-full cursor-pointer"
                         >
                             <X />
                         </div>
-                        <h1 className="font-semibold text-2xl text-black">AI Assistant</h1>
+                        <h1 className="font-semibold text-2xl text">Global Thought AI</h1>
                         <div className="w-8" />
                     </div>
 
-                    <div className="bg-gray-100 rounded-t-2xl p-5 flex flex-col justify-between h-11/12 md:h-[485px]">
+                    <div className="bg-gray-100 dark:bg-zinc-900     p-5 flex flex-col justify-between h-11/12 md:h-[485px]">
                         <div className="flex-1 overflow-auto space-y-4 mb-2" ref={chatRef}>
                             {chats.map((chat, i) => (
                                 <div key={i} className={`flex ${chat.sender === "user" ? "justify-end" : "items-start"}`}>
@@ -127,8 +127,8 @@ const ChatAssistant = () => {
                                     )}
                                     <p
                                         className={`p-2 px-4 rounded-2xl max-w-[90%] text-sm ${chat.sender === "user"
-                                            ? "bg-blue-600 text-white mr-2"
-                                            : "bg-white text-gray-800 ml-2"
+                                            ? "bg-gray-300 dark:bg-zinc-800 text-gray-800 dark:text-white  mr-2"
+                                            : "bg-gray-200 dark:bg-zinc-700  text-gray-800 dark:text-white ml-2"
                                             }`}
                                         dangerouslySetInnerHTML={{ __html: formatText(chat.message) }}
                                     />
@@ -148,12 +148,12 @@ const ChatAssistant = () => {
 
 
 
-                        <div className="flex gap-1 overflow-x-auto text-xs mb-2">
+                        <div className="flex gap-1 overflow-x-auto text-xs mb-2 py-2">
                             {customQs.map((q, i) => (
                                 <button
                                     key={i}
                                     onClick={() => sendMessage(q)}
-                                    className="bg-white border px-3 py-1 rounded-full text-gray-600 font-medium whitespace-nowrap"
+                                    className="bg-white dark:bg-zinc-700  text-gray-800 dark:text-white border px-3 py-1 rounded-full font-medium whitespace-nowrap"
                                 >
                                     {q}
                                 </button>
@@ -166,7 +166,7 @@ const ChatAssistant = () => {
                                     type="text"
                                     name="chat"
                                     placeholder="Type your message..."
-                                    className="py-3 pl-5 pr-12 bg-white text-black w-full rounded-full outline-none border border-gray-300 focus:border-blue-500"
+                                    className="py-3 pl-5 pr-12 bg-white text-black dark:bg-zinc-700 dark:text-white w-full rounded-full outline-none border border-gray-300 focus:border-blue-500"
                                 />
                                 <div className="flex items-center ">
                                     {chats.some((c) => c.sender === "typing") ? (

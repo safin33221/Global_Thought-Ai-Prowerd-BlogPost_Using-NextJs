@@ -2,7 +2,7 @@
 import { useTheme } from "next-themes"
 import * as React from "react"
 import Link from "next/link"
-import { MenuIcon, XIcon, CircleCheckIcon, CircleHelpIcon, CircleIcon, User } from "lucide-react"
+import { MenuIcon, XIcon, CircleCheckIcon, CircleHelpIcon, CircleIcon, User, Laptop } from "lucide-react"
 import { Moon, Sun } from "lucide-react"
 
 import {
@@ -77,8 +77,23 @@ export function NavigationMenuDemo() {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
     const { userDetails } = useCurrentUserDetails()
 
-    const { setTheme } = useTheme()
+
     const session = useSession()
+    const { setTheme, theme, systemTheme } = useTheme();
+    const [currentTheme, setCurrentTheme] = React.useState("system");
+
+
+    React.useEffect(() => {
+        const resolved = theme === "system" ? systemTheme : theme;
+        setCurrentTheme(resolved || "light");
+    }, [theme, systemTheme]);
+
+    const toggleTheme = () => {
+        const next =
+            theme === "light" ? "dark" : "light";
+        setTheme(next);
+    };
+
 
     return (
         <div className="container mx-auto px-4 py-2 flex items-center justify-between">
@@ -86,7 +101,7 @@ export function NavigationMenuDemo() {
                 <button className=" md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                     {mobileMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
                 </button>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                <h1 className="text-xl md:text-2xl  font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                     Global Thought
                 </h1>
                 {mobileMenuOpen && (
@@ -221,24 +236,27 @@ export function NavigationMenuDemo() {
             </div>
             <div className="flex items-center justify-center">
                 <div className="  p-3 md:flex gap-3 items-center ">
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="icon">
-                                <Sun className="h-[1.2rem]  w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-                                <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-                                <span className="sr-only">Toggle theme</span>
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => setTheme("light")}>
-                                Light
-                            </DropdownMenuItem>
+                    <div className="p-3 md:flex gap-3 items-center">
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={toggleTheme}
+                            className="relative"
+                        >
 
-                            <DropdownMenuItem onClick={() => setTheme("system")}>
-                                dark
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                            <Sun
+                                className={`h-[1.2rem] w-[1.2rem] transition-all ${currentTheme === "light" ? "opacity-0" : "opacity-100"}`}
+                            />
+
+                            <Moon
+                                className={`absolute h-[1.2rem] w-[1.2rem] transition-all ${currentTheme === "dark" ? "opacity-0" : "opacity-100"}`}
+                            />
+
+
+
+                            <span className="sr-only">Toggle theme</span>
+                        </Button>
+                    </div>
                 </div>
                 <div >
                     {
