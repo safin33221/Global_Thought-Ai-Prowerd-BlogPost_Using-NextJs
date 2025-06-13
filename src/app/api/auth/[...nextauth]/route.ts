@@ -1,11 +1,12 @@
 import loginUser from "@/app/actions/auth/loginUsr";
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
+import toast from "react-hot-toast";
 
 export const authOptions = {
     // Configure one or more authentication providers
     session: {
-        strategy: "jwt",
+        strategy: 'jwt' as const,
         maxAge: 2 * 24 * 60 * 60, // 2 days
         updateAge: 24 * 60 * 60,  // refresh once per day
     },
@@ -21,21 +22,30 @@ export const authOptions = {
                 email: { label: "email", type: "text", placeholder: "your_email@gmail.com" },
                 password: { label: "Password", type: "password" }
             },
-            async authorize(credentials: { email: string; password: string }, req: Request) {
-                const user = await loginUser(credentials)
-
-                // Add logic here to look up the user from the credentials supplied
-
-
-                if (user) {
-                    // Any object returned will be saved in `user` property of the JWT
-                    return user
-                } else {
-                    // If you return null then an error will be displayed advising the user to check their details.
-                    return null
-
-                    // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+            async authorize(credentials: Record<"email" | "password", string> | undefined, req: unknown) {
+                if (!credentials) {
+                    return null;
                 }
+                const dbUser = await loginUser(credentials);
+
+                // If loginUser returns an error, throw it for NextAuth to handle
+                if (dbUser?.error) {
+                    toast.error(dbUser.error);
+                }
+
+                if (dbUser && dbUser.user) {
+                    // Map dbUser.user to NextAuth User type
+                    const user = dbUser.user;
+                    return {
+                        id: user._id?.toString() ?? user.id ?? "",
+                        name: user.name ?? null,
+                        email: user.email ?? null,
+                        image: user.image ?? null
+                    };
+                }
+
+                // If you return null then an error will be displayed advising the user to check their details.
+                return null;
             }
         })
     ]

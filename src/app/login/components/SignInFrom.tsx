@@ -23,45 +23,34 @@ const SignInFrom = () => {
     const onSubmit = async (data: FormData) => {
         const { email, password } = data
         try {
-            toast("Signing in...");
-            // Call the signIn function from next-auth
-            // You can pass additional options like redirect URL, etc.
-
-
+            const signin = toast.loading("Signing in...");
+            
             const response = await signIn("credentials", {
                 email,
                 password,
                 callbackUrl: "/",
                 redirect: false
             });
-   
+
             // Check if the sign-in was successful
             if (!response) {
-                toast.error("Failed to sign in. Please check your credentials and try again.");
+                toast.error("Failed to sign in. Please check your credentials and try again.", { id: signin });
             } else if (response.ok) {
                 router.push("/")
-               
-                toast.success("Successfully signed in!");
-
+                toast.success("Successfully signed in!", { id: signin });
             } else {
-                toast.error("Invalid credentials. Please try again.");
-
-
-
+                toast.error("Invalid credentials. Please try again.", { id: signin });
             }
-            // Optionally, you can redirect the user after successful sign-in
+      
         } catch (error) {
-            // console.error("Error during sign-in:", error);
-            if(error){
-
+            if (error) {
                 return toast.error("Failed to sign in. Please check your credentials and try again.");
             }
-
         }
 
     };
     return (
-        <div className="flex items-center  justify-center rounded-4xl shadow-cyan-50   p-16 bg-transparent backdrop-blur-lg">
+        <div className="flex items-center  justify-center rounded-2xl shadow-cyan-50  p-8 md:p-16 bg-transparent backdrop-blur-lg">
 
             <div className="w-full ">
                 <h2 className="text-3xl font-bold mb-6  text-center">Welcome Back 👋</h2>

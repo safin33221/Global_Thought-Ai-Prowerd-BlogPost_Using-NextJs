@@ -5,7 +5,6 @@ import {
   PlusCircle,
   Folder,
   BarChart,
-  User,
   Files,
   Users,
   Tags,
@@ -14,15 +13,18 @@ import {
   CreditCard,
   HelpCircle,
   X,
+  Globe,
+  UserCircle,
 } from "lucide-react";
 import clsx from "clsx";
 
 const menuItems = [
-  { label: "My Posts", icon: FileText, href: "/dashboard", roles: ["USER", "ADMIN"] },
+  { label: "Analytics", icon: BarChart, href: "/dashboard/", roles: ["USER", "ADMIN"] },
+  { label: "My Blog", icon: FileText, href: "/dashboard/blog/myBlog", roles: ["USER", "ADMIN"] },
   { label: "Create Post", icon: PlusCircle, href: "/dashboard/blog/create", roles: ["USER", "ADMIN"] },
   { label: "Drafts", icon: Folder, href: "/dashboard/drafts", roles: ["USER", "ADMIN"] },
-  { label: "Analytics", icon: BarChart, href: "/dashboard/analytics", roles: ["USER", "ADMIN"] },
-  { label: "Profile", icon: User, href: "/dashboard/profile", roles: ["USER", "ADMIN"] },
+  { label: "Ai Creator", icon: FileText, href: "/dashboard/blog/aiBlogCreate", roles: ["USER", "ADMIN"] },
+
   // Admin-only
   { label: "All Posts", icon: Files, href: "/dashboard/posts", roles: ["ADMIN"] },
   { label: "Users", icon: Users, href: "/dashboard/users", roles: ["ADMIN"] },
@@ -31,10 +33,10 @@ const menuItems = [
 ];
 
 const otherItems = [
-  { label: "View site", icon: Settings, href: "/" },
+  { label: "View site", icon: Globe, href: "/" },
   { label: "Settings", icon: Settings, href: "/dashboard/settings" },
   { label: "Payment", icon: CreditCard, href: "/dashboard/payment" },
-  { label: "Accounts", icon: User, href: "/dashboard/profile" },
+  { label: "Accounts", icon: UserCircle, href: "/dashboard/profile" },
   { label: "Help", icon: HelpCircle, href: "/dashboard/help" },
 ];
 
@@ -59,11 +61,15 @@ const DashboardAside = () => {
       <Link
         key={item.label}
         href={item.href}
-        onClick={() => setActive(item.label)}
+        onClick={() => {
+          setActive(item.label)
+          setOpen(false)
+        }}
         className={clsx(
           "flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition-all",
           isActive ? "bg-white text-indigo-600 shadow" : " hover:text-white hover:bg-indigo-500"
         )}
+
       >
         <Icon className="w-5 h-5" />
         {item.label}
@@ -73,15 +79,42 @@ const DashboardAside = () => {
 
 
   return (
-    <aside className=" min-h-screen w-64 border  p-4 fixed md:static z-50 md:z-auto transition-all duration-300">
-      <div className="flex items-center justify-between mb-6 md:hidden">
+    <aside className=" min-h-screen w-64   md:p-4 fixed md:static z-50 md:z-auto transition-all duration-300">
+      <div className="flex items-center justify-between  md:hidden relative">
+        {
+          open && (
 
-        <button onClick={() => setOpen(!open)}>
+            <div className=" bg-white h-screen p-5 " >
+              <div>
+                <div>
+                  <h1 className=" text-2xl font-bold " >Global Thought</h1>
+                  <p>{userDetails?.name}</p>
+                </div>
+                <div className=" border my-7"></div>
+                <div className="space-y-1">
+                  {menuItems.filter((item) => item.roles.includes(role ?? "USER")).map(renderLink)}
+                </div>
+              </div>
+              <div className="border  my-5">
+
+              </div>
+              <div>
+
+                <div className="space-y-1">
+                  {otherItems.map(renderLink)}
+                </div>
+              </div>
+            </div>
+          )
+        }
+
+        <button className=" absolute z-20 top-0 left-0 m-5" onClick={() => setOpen(!open)}>
           {open ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6 " />}
         </button>
       </div>
 
-      <div className={clsx("space-y-6", { hidden: !open && window.innerWidth < 768, block: open || window.innerWidth >= 768 })}>
+
+      <div className="hidden md:block" >
         <div>
           <div>
             <h1 className=" text-2xl font-bold " >Global Thought</h1>

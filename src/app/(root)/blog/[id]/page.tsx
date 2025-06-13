@@ -1,73 +1,92 @@
 "use client"
 
-import Image from 'next/image';
-import React from 'react';
 
-const page = ({ params }: { params: { id: string } }) => {
-    const { id } = params
-    const featuredPosts = [
-        {
-            title: "The Rise of AI in Blogging",
-            image: "https://framerusercontent.com/images/RBpHBZtwSkU6uF9GENaXtaZ4ozU.png",
-            summary: "Explore how AI is transforming the way we write and discover content.",
-            slug: "rise-of-ai-in-blogging",
-            author: "Jane Doe",
-            date: "2025-01-01",
-        },
-        {
-            title: "Boost Productivity with GPT",
-            image: "https://www.growthbarseo.com/wp-content/uploads/2022/05/ai-blog-post-ideas-1-1024x1010.png",
-            summary: "Use AI tools to write faster and better.",
-            slug: "boost-productivity-gpt",
-            author: "John Smith",
-            date: "2025-02-01",
-        },
-        {
-            title: "Harnessing AI for Creative Writing",
-            image: "https://www.growthbarseo.com/wp-content/uploads/2022/05/ai-blog-post-ideas-1-1024x1010.png",
-            summary: "Use AI tools to write faster and better.",
-            slug: "harnessing-ai-creative-writing",
-            author: "Alice Johnson",
-            date: "2025-03-01",
-        },
-    ];
-    const details = featuredPosts.filter(post => post.slug === id)[0]
-    const { image, title, summary, date, author, slug } = details;
+import Loader from '@/app/components/Loader';
+import { BlogPost } from '@/types/types';
+import axios from 'axios';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+
+const SingleBlog = ({ params }: { params: { id: string } }) => {
+    const { id } = params;
+    const [blog, setBLog] = useState<BlogPost | null>(null)
+    useEffect(() => {
+        const getSinglePost = async () => {
+            const res = await axios.get(`/api/blog/${id}`)
+            setBLog(res?.data?.blog);
+        }
+        getSinglePost()
+    }, [id])
+    if(!blog) return <Loader/>
+
 
     return (
         <div>
-            <div id='post-body' className="border rounded-lg flex-col overflow-hidden shadow-md max-w-5xl m-auto items-center justify-center  ">
+            <div className=" w-full mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                <div>
 
-                {image && (
+
+
+
                     <Image
-                        src={image}
-                        alt={title}
-                        width={600}
+                        src={blog?.cover || ''}
+                        alt="Cover Image"
+                        width={800}
                         height={400}
-                        className="w-full  object-cover"
+                        className="rounded-lg mb-6  object-cover h-[450px] bg-cover"
                     />
-                )}
-                <div className="p-4">
-                    <h3 className="text-lg font-semibold">{title}</h3>
-                    <p className="text-sm text-muted-foreground">{summary}</p>
-                </div>
-                <div className="border-t ">
-                    <div className="">
-                        <div className='flex flex-col'>
-                            <p className="text-xs text-muted-foreground">By {author}</p>
-                            <p className="text-xs text-muted-foreground">{date}</p>
-                        </div>
-                        {slug && (
-                            <a href={`/blog/${slug}`} className="text-blue-500 hover:underline">
-                                Read more
-                            </a>
-                        )}
 
+                </div>
+
+                <div>
+                    <div className="flex items-center gap-3 mb-6">
+                        <Image
+                            src={blog?.author?.avatarUrl || ""}
+                            alt={`profile`}
+                            width={40}
+                            height={40}
+                            className="rounded-full"
+                        />
+                        <div>
+                            <p className="font-semibold">{blog?.author?.name}</p>
+                            <p className="text-sm text-gray-500">{new Date(blog?.createdAt).toLocaleDateString()}</p>
+                        </div>
                     </div>
+                    <h1 className="text-3xl font-bold mb-4">{blog?.title}</h1>
+                    <div className="prose prose-lg mb-6 whitespace-pre-line">{blog?.content}</div>
+
+                    <div className="mb-4">
+                        <h3 className="font-semibold mb-2">Tags:</h3>
+                        <div className="flex gap-2 flex-wrap">
+                            {blog?.tags?.map((tag, index) => (
+                                <span
+                                    key={index}
+                                    className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                                >
+                                    #{tag}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {blog?.links.length > 0 && (
+                        <div>
+                            <h3 className="font-semibold mb-2">Related Links:</h3>
+                            <ul className="list-disc list-inside">
+                                {blog?.links?.map((link, index) => (
+                                    <li key={index}>
+                                        <a href={link.url} className="text-blue-600 hover:underline" target="_blank">
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
     );
 };
 
-export default page;
+export default SingleBlog;

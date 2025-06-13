@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const registerUser = async (payload: User) => {
     const { name, email, password } = payload;
-    console.log(name, email);
+
 
     if (!name || !email || !password) {
         toast.error("All fields are required");
@@ -14,7 +14,7 @@ const registerUser = async (payload: User) => {
     }
     const user = {
         ...payload,
-   
+
         role: payload.role ?? "USER",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -25,12 +25,13 @@ const registerUser = async (payload: User) => {
     if (!existingUser) {
         const hashPassword = await bcrypt.hash(password, 10);
         user.password = hashPassword;
-        const result = await userCollection.insertOne(user)
+        const { _id, ...userWithoutId } = user;
+        const result = await userCollection.insertOne(userWithoutId)
         result.insertedId.toString();
         return result;
     }
-    console.log(`User with email ${email} already exists`);
-    return { acknowledged: false, message: "User already exists" };
+    
+    return { acknowledged: false, message: "User already registered" };
 }
 
 export default registerUser;

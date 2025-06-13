@@ -16,20 +16,29 @@ export interface loginPayload {
   password: string;
 }
 
-export interface BlogPost {
-  id: string;
-  title: string;
-  slug: string;
-  content: string;
-  excerpt?: string;
-  coverImage?: string;
+export interface BlogLink {
+  label: string;
+  url: string;
+}
+
+export interface BlogAuthor {
+  name: string;
+  email: string;
   authorId: string;
-  category?: string;
-  tags?: string[];
-  published: boolean;
-  publishedAt?: string;
+  avatarUrl:string;
+}
+
+export interface BlogPost {
+  _id?: string;
+  title: string;
+  cover: string;
+  content: string;
+  tags: string[];
+  links: BlogLink[];
+  author: BlogAuthor;
   createdAt: string;
   updatedAt: string;
+  status: "published" | "draft";
 }
 
 

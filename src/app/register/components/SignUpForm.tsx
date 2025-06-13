@@ -25,19 +25,21 @@ const SignUpForm = () => {
     } = useForm<FormData>({ resolver: zodResolver(schema) });
 
     const onSubmit = async (data: FormData) => {
+        const signUP = toast.loading("SignUp.....")
         const result = await registerUser(data)
-  
+        console.log(result);
+
         if (result?.acknowledged === true) {
-            toast.success('user register success. Login Now!')
+            toast.success('user register success. Login Now!', { id: signUP })
             router.push('/login')
         } else {
-            toast.error(result?.message)
+            toast.error(result && 'message' in result ? result.message : 'Registration failed', { id: signUP })
         }
 
 
     };
     return (
-        <div className="flex items-center justify-center p-16 rounded-4xl shadow-cyan-50    backdrop-blur-lg bg-transparent">
+        <div className="flex items-center justify-center p-8 md:p-16 rounded-2xl shadow-cyan-50    backdrop-blur-md bg-transparent">
 
             <div className="w-full max-w-md">
                 <h2 className="text-3xl font-bold mb-6  text-center">Welcome  👋</h2>

@@ -1,48 +1,31 @@
-
-"use client";
-
 import { User } from "@/types/types";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
-
 export function useCurrentUserDetails() {
-    const { data: session, status } = useSession();
-    const [userDetails, setUserDetails] = useState<User | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
-    ;
+    const { data: session } = useSession();
 
-    useEffect(() => {
-        const fetchUserDetails = async () => {
-            if (session?.user?.email) {
-                try {
-                    const res = await fetch(`/api/users/${session?.user?.email}`);
-          
-                    if (!res.ok) throw new Error("Failed to fetch user details");
-                    const data = await res.json();
-                    setUserDetails(data);
-                } catch (err) {
-                    if (err instanceof Error) {
-                        setError(err.message);
-                    } else {
-                        toast.error("An unknown error occurred");
-                    }
-                } finally {
-                    setLoading(false);
+    const { data: userDetails = null, isLoading, refetch } = useQuery<User>({
+        queryKey: ['user', session?.user?.email],
+        enabled: !!session?.user?.email,
+        queryFn: async () => {
+            try {
+                const res = await axios.get(`/api/users/${session?.user?.email}`);
+                return res.data || {}; // Always return an object
+            } catch (error) {
+                if (error) {
+
+                    toast.error("Failed to fetch user details");
+                    return {}; // Fallback: return empty object
                 }
             }
-        };
-
-        if (status === "authenticated") {
         }
-        fetchUserDetails();
-    }, [session, status]);
+    });
 
     return {
         userDetails,
-        isLoading: loading,
-        error,
+        isLoading,
+        refetch
     };
 }
