@@ -149,7 +149,7 @@ export default function CreatePostPage() {
               <button
                 onClick={handleAddLink}
                 type="button"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"
               >
                 Add
               </button>
@@ -212,7 +212,7 @@ export default function CreatePostPage() {
       {/* Publish Button */}
       <button
         onClick={handleSubmit}
-        className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-lg shadow-md transition-transform transform hover:scale-105"
+        className="w-full bg-gradient-to-r bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg shadow-md transition-transform transform hover:scale-105"
       >
         Publish
       </button>

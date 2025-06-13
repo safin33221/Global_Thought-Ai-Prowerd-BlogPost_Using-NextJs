@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import toast, { ToastIcon } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const customQs = [
     "How to write a blog post?",
@@ -92,7 +92,7 @@ const ChatAssistant = () => {
         <>
             <Button
                 onClick={() => setIsOpen(true)}
-                className="fixed  bottom-10 right-12 text-lg z-50   bg-blue-500 text-white dark:bg-zinc-900 rounded-full shadow-lg px-5 py-3"
+                className="fixed  bottom-10 right-12 text-lg z-50   bg-indigo-600 text-white  rounded-full shadow-lg px-5 py-3"
             >
                 Help 💬
             </Button>

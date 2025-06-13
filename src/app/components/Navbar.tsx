@@ -105,7 +105,7 @@ export function NavigationMenuDemo() {
                     Global Thought
                 </h1>
                 {mobileMenuOpen && (
-                    <div className="    absolute top-16 left-0 right-0  backdrop-blur-2xl   z-50 flex flex-col p-4 shadow-md space-y-4 md:hidden">
+                    <div className="    absolute top-16 left-0 right-0  backdrop-blur-2xl   z-50 flex flex-col p-2 shadow-md space-y-4 md:hidden">
                         <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
                         <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
                         <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
@@ -235,8 +235,9 @@ export function NavigationMenuDemo() {
 
             </div>
             <div className="flex items-center justify-center">
-                <div className="  p-3 md:flex gap-3 items-center ">
-                    <div className="p-3 md:flex gap-3 items-center">
+                <div className="   md:flex gap-3 items-center ">
+                    <div className="p-2
+                     md:flex gap-3 items-center">
                         <Button
                             variant="outline"
                             size="icon"

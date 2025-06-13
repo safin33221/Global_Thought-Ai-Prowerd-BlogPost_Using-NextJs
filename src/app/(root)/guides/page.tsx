@@ -19,7 +19,7 @@ export default function GuidesPage() {
     return (
         <main className="w-full px-4 sm:px-6 md:px-12 py-12 space-y-12 bg-white dark:bg-background text-gray-900 dark:text-white">
             <section className="text-center max-w-5xl mx-auto">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">Guides for Global Thought</h1>
+                <h1 className="text-4xl md:text-5xl font-bold mb-4">Guides for <strong className="text-indigo-500">Global Thought</strong></h1>
                 <p className="text-lg md:text-xl text-muted-foreground">
                     Step-by-step tutorials to help you write, publish, and thrive in the Global Thought ecosystem.
                 </p>
