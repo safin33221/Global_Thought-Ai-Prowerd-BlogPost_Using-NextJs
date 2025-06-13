@@ -23,6 +23,7 @@ const menuItems = [
   { label: "My Blog", icon: FileText, href: "/dashboard/blog/myBlog", roles: ["USER", "ADMIN"] },
   { label: "Create Post", icon: PlusCircle, href: "/dashboard/blog/create", roles: ["USER", "ADMIN"] },
   { label: "Drafts", icon: Folder, href: "/dashboard/drafts", roles: ["USER", "ADMIN"] },
+  { label: "Ai Creator", icon: FileText, href: "/dashboard/blog/aiBlogCreate", roles: ["USER", "ADMIN"] },
 
   // Admin-only
   { label: "All Posts", icon: Files, href: "/dashboard/posts", roles: ["ADMIN"] },
