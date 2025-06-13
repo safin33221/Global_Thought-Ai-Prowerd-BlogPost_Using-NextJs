@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import NextAuthProvider from "@/Providers/NextAuthProvider";
 import { ThemeProvider } from "./components/theme-provider";
 import ReactQueryProvider from "@/Providers/ReactQueryProvider";
+import ChatAssistant from "./components/ChatAssistant";
 
 
 
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               enableSystem
               disableTransitionOnChange
             >
+              <ChatAssistant />
               {children}
               <Toaster />
             </ThemeProvider>
