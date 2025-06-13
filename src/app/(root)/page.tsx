@@ -7,6 +7,7 @@ import FeatureBlog from '../components/FeatureBlog';
 import AiShowcase from '../components/AiShowcase';
 
 
+
 const page = () => {
   return (
     <div className="flex flex-col items-center justify-center
@@ -27,6 +28,7 @@ const page = () => {
       <div className='container'>
         <FeatureBlog />
         <AiShowcase />
+
       </div>
 
     </div>

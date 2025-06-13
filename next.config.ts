@@ -34,6 +34,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "storyset.com"
+      },
+      {
+        protocol: "https",
         hostname: "img.icons8.com"
       },
     ],
