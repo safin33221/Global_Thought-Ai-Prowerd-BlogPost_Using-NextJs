@@ -6,7 +6,7 @@ import { BlogPost } from '@/types/types';
 import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { FC } from "react";
+
 
 interface PageProps {
     params: {
@@ -14,8 +14,8 @@ interface PageProps {
     };
 }
 
-const SingleBlog: FC<PageProps> = ({ params }) => {
-    const id = params.id;
+const SingleBlog = ({ params }: PageProps) => {
+    const { id } = params;
     const [blog, setBLog] = useState<BlogPost | null>(null)
     useEffect(() => {
         const getSinglePost = async () => {
