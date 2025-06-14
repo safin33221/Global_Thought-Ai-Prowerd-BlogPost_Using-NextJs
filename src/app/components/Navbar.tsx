@@ -38,7 +38,7 @@ import GlobalThought from "./GlobalThought"
 
 const components = [
     {
-        title: "SEO Optimization    ",
+        title: "AI Blog Generator",
         href: "/features/ai-blog-generator",
         description: "Create high-quality blog posts instantly using our powerful AI writing engine.",
     },
