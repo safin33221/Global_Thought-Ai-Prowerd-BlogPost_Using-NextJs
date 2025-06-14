@@ -7,14 +7,10 @@ import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
-interface PageProps {
-    params: {
-        id: string;
-    };
-}
 
 
-const SingleBlog = ({ params }: PageProps) => {
+
+const SingleBlog = ({ params }: { params: { id: string } }) => {
     const id = params.id;
     const [blog, setBLog] = useState<BlogPost | null>(null)
     useEffect(() => {
