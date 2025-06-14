@@ -27,9 +27,7 @@ export async function PUT(req: NextRequest) {
   // 1️⃣  Grab the email from the path  …/by‑email/<email>
   const email = req.nextUrl.pathname.split("/").pop();
 
-  if (!email) {
-    return NextResponse.json({ error: "Email is required" }, { status: 400 });
-  }
+
 
   // 2️⃣  Parse the JSON body safely
   let body: { url?: string };
