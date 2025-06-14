@@ -18,8 +18,8 @@ Use the following test credentials to log in and explore the platform:
 
 | Role  | Email            | Password |
 | ----- | ---------------- | -------- |
-| Admin | admin@gmail.com  | admin123 |
-| User  | user@example.com | user123  |
+| Admin | admin@gmail.com  | admin@gmail.com |
+| User  | user@gmail.com   | user@gmail.com  |
 
 ---
 
