@@ -6,6 +6,8 @@ import DashboardAside from './components/DashboardAside';
 import Loader from '../components/Loader';
 import { Menu } from 'lucide-react';
 import clsx from 'clsx';
+import GlobalThought from '../components/GlobalThought';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { isLoading } = useCurrentUserDetails();
@@ -50,13 +52,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {/* Topbar with mobile menu button */}
         <div className="p-4 md:hidden bg-card  shadow">
           <div className='flex justify-between'>
-            <button
-              onClick={() => setIsSidebarOpen(true)}
-              className="text-gray-700 focus:outline-none"
-            >
-              <Menu className="w-6 h-6" />
-            </button>
-            <h1>Global Thought</h1>
+            <div className='flex items-center'>
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                className="text-gray-700 focus:outline-none"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
+              <ThemeToggle/>
+            </div>
+            <GlobalThought />
           </div>
         </div>
 
