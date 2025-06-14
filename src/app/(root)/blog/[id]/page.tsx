@@ -7,7 +7,13 @@ import axios from 'axios';
 import Image from 'next/image';
 import React from 'react';
 
-export default function Page({ params }) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function Page({ params }: PageProps) {
   const { id } = params;
 
   const { data: blog, isLoading } = useQuery<BlogPost>({
