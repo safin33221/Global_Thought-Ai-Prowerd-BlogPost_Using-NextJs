@@ -25,6 +25,7 @@ const registerUser = async (payload: User) => {
     if (!existingUser) {
         const hashPassword = await bcrypt.hash(password, 10);
         user.password = hashPassword;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { _id, ...userWithoutId } = user;
         const result = await userCollection.insertOne(userWithoutId)
         result.insertedId.toString();
