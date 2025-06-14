@@ -7,7 +7,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import React from 'react';
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function Page({ params }) {
   const { id } = params;
 
   const { data: blog, isLoading } = useQuery<BlogPost>({
