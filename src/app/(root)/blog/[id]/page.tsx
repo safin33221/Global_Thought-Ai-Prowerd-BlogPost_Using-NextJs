@@ -7,11 +7,11 @@ import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
-type PageProps = { params: { id: string } };
 
 
-export default  function SingleBlog({ params }: PageProps) {
-    const id = params.id;
+
+export default function Page({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = React.use(params);
     const [blog, setBLog] = useState<BlogPost | null>(null)
     useEffect(() => {
         const getSinglePost = async () => {
