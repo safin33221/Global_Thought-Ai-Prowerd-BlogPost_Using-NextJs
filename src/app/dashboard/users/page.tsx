@@ -9,9 +9,11 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { MoreVertical } from "lucide-react";
 import Loader from '@/app/components/Loader';
+import toast from 'react-hot-toast';
+
 
 const Users = () => {
-    const { data: users, isLoading } = useQuery<User>({
+    const { data: users, isLoading, refetch } = useQuery<User>({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axios.get('/api/users')
@@ -22,7 +24,22 @@ const Users = () => {
 
 
 
-    const handleRoleChange = (id: string, newRole: User["role"]) => {
+    const handleRoleChange = async (id: string, newRole: User["role"]) => {
+        console.log(id, newRole);
+        try {
+            const res = await axios.put(`/api/users/update-by-id/${id}`, { role: newRole })
+            if (res.status === 200) {
+                refetch()
+                toast.success("Role updated")
+            }
+
+        } catch (error) {
+            if (error) {
+
+                toast.error(error?.message);
+            }
+
+        }
 
     };
 
@@ -51,9 +68,9 @@ const Users = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {users?.map((user,idx) => (
+                            {users?.map((user, idx) => (
                                 <tr key={user?.id} className="border-t hover:bg-secondary">
-                                    <td className="px-4 py-3 font-medium">{idx+1}</td>
+                                    <td className="px-4 py-3 font-medium">{idx + 1}</td>
                                     <td className="px-4 py-3 font-medium">{user?.name}</td>
                                     <td className="px-4 py-3">{user?.email}</td>
                                     <td className="px-4 py-3 capitalize">{user?.role}</td>
@@ -70,11 +87,11 @@ const Users = () => {
                                             <DropdownMenuContent align="end">
                                                 {
                                                     user?.role === 'USER' ? (
-                                                        <DropdownMenuItem onClick={() => handleRoleChange(user?.id, "ADMIN")}>
+                                                        <DropdownMenuItem onClick={() => handleRoleChange(user?._id, "ADMIN")}>
                                                             Make Admin
                                                         </DropdownMenuItem>
                                                     ) : (
-                                                        <DropdownMenuItem onClick={() => handleRoleChange(user?.id, "USER")}>
+                                                        <DropdownMenuItem onClick={() => handleRoleChange(user?._id, "USER")}>
                                                             Make User
                                                         </DropdownMenuItem>
                                                     )
