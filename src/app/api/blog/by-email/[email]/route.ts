@@ -1,8 +1,8 @@
 import { CollectionObjects, dbConnect } from "@/lib/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: { email: string } }) {
-    const { email } = params;
+export async function GET(request: NextRequest) {
+    const email = request.nextUrl.pathname.split("/").pop();
     const blogCollection = await dbConnect(CollectionObjects.blogCollection)
     if (!email) {
         return NextResponse.json({ error: 'Email is required' }, { status: 400 });
