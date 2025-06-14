@@ -43,11 +43,24 @@ const Users = () => {
 
     };
 
-    const handleToggleStatus = (id: string) => {
 
-    };
-    const handleDelete = (id: string) => {
+    const handleDelete = async (id: string) => {
+        console.log(id);
+        try {
+            const res = await axios.delete(`/api/users/update-by-id/${id}`,)
+            console.log(res);
+            if (res.status === 200 ) {
+                refetch()
+                toast.success("Deleted user")
+            }
 
+        } catch (error) {
+            if (error) {
+
+                toast.error(error?.message);
+            }
+
+        }
     };
 
     if (isLoading || !users) return <Loader />
@@ -104,7 +117,7 @@ const Users = () => {
                                                 {/* <DropdownMenuItem onClick={() => handleToggleStatus(user?.id)}>
                                                     {user?.status === "active" ? "Suspend User" : "Activate User"}
                                                 </DropdownMenuItem> */}
-                                                <DropdownMenuItem onClick={() => handleDelete(user.id)} className="text-red-600">
+                                                <DropdownMenuItem onClick={() => handleDelete(user?._id)} className="text-red-600">
                                                     Delete User
                                                 </DropdownMenuItem>
                                             </DropdownMenuContent>

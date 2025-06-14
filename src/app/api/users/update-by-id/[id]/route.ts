@@ -25,3 +25,22 @@ export async function PUT(
         return NextResponse.json({ message: "server error" }, { status: 500 });
     }
 }
+
+export async function DELETE(
+    req: NextRequest,
+    { params }: { params: { id: string } }
+) {
+    const id = params.id;
+    try {
+        const userCollection = await dbConnect(CollectionObjects.userCollection)
+        await userCollection.deleteOne({ _id: new ObjectId(id) })
+        return NextResponse.json({ message: "user delete successful" }, { status: 200 });
+    } catch (error) {
+        if (error) {
+            return NextResponse.json({ error: "something wrong" }, { status: 401 })
+        }
+        return NextResponse.json({ message: "server error" }, { status: 500 });
+    }
+
+
+}
