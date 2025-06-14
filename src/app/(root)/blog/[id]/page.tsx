@@ -1,4 +1,4 @@
-'use client';
+  'use client';
 
 import Loader from '@/app/components/Loader';
 import { BlogPost } from '@/types/types';
