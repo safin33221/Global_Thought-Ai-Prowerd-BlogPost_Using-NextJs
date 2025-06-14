@@ -18,7 +18,7 @@ export default function AiShowcase() {
   };
 
   return (
-    <section className=" rounded-2xl p-8 mt-20 shadow-xl mx-auto">
+    <section className="max-w-7xl rounded-2xl p-8 mt-20 shadow-xl mx-auto">
       {/* Section Intro */}
       <div className="text-center mb-10">
 
@@ -32,11 +32,11 @@ export default function AiShowcase() {
       </div>
 
       {/* AI Simulation */}
-      <div className="bg-muted/40 p-10 rounded-xl grid md:grid-cols-2 gap-6 max-w-6xl mx-auto h-full">
+      <div className=" w-full p-14 rounded-xl grid md:grid-cols-2 gap-6 max-w-7xl mx-auto h-full">
         {/* User Content */}
         <div className="h-full  ">
           <h3 className="text-sm font-medium mb-1 text-muted-foreground">📝 Blog Draft</h3>
-          <div className="bg-background border h-full   p-2 md:p-4 rounded-lg text-sm leading-relaxed shadow-sm">
+          <div className="bg-background border h-full w-full   p-4 md:p-4 rounded-lg text-sm leading-relaxed shadow-sm">
             AI is transforming the way we create content. With tools like ThinkPost, bloggers can now write faster, smarter, and more optimized articles that rank higher in search engines.
           </div>
         </div>
@@ -71,7 +71,7 @@ export default function AiShowcase() {
       </div>
 
       {/* Benefits */}
-      <div className="mt-12 grid sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div className="mt-12 m-2 md:m-0 grid  sm:grid-cols-2 md:grid-cols-4 gap-5 text-center">
         <Benefit icon={<PenTool className="mx-auto text-blue-600" />} title="Faster Writing" desc="Let AI handle summaries and tags so you can focus on storytelling." />
         <Benefit icon={<Lightbulb className="mx-auto text-yellow-500" />} title="Smarter Content" desc="Avoid keyword stuffing — get optimized suggestions." />
         <Benefit icon={<BarChart className="mx-auto text-green-500" />} title="Higher Ranking" desc="Structured summaries help your blog stand out on search engines." />
@@ -83,7 +83,7 @@ export default function AiShowcase() {
 
 function Benefit({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
   return (
-    <div className="bg-card p-4 rounded-xl border shadow-sm">
+    <div className="bg-card p-4 rounded-2xl border shadow-sm">
       <div className="mb-2">{icon}</div>
       <h4 className="font-semibold text-sm">{title}</h4>
       <p className="text-xs text-muted-foreground mt-1">{desc}</p>
