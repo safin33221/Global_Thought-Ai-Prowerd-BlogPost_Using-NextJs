@@ -11,7 +11,7 @@ import { MoreVertical } from "lucide-react";
 import Loader from '@/app/components/Loader';
 
 const Users = () => {
-    const { data: users, isLoading } = useQuery({
+    const { data: users, isLoading } = useQuery<User>({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axios.get('/api/users')
@@ -33,7 +33,7 @@ const Users = () => {
 
     };
 
-    if (isLoading) return <Loader />
+    if (isLoading || !users) return <Loader />
     return (
         <div>
             <div className="max-w-6xl mx-auto p-6  rounded-2xl">
@@ -42,6 +42,7 @@ const Users = () => {
                     <table className="min-w-full text-sm border border-gray-200 rounded-lg overflow-hidden dark:bg-card">
                         <thead className="bg-muted text-left">
                             <tr>
+                                <th className="px-4 py-3">No</th>
                                 <th className="px-4 py-3">Name</th>
                                 <th className="px-4 py-3">Email</th>
                                 <th className="px-4 py-3">Role</th>
@@ -50,8 +51,9 @@ const Users = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {users?.map((user) => (
+                            {users?.map((user,idx) => (
                                 <tr key={user?.id} className="border-t hover:bg-secondary">
+                                    <td className="px-4 py-3 font-medium">{idx+1}</td>
                                     <td className="px-4 py-3 font-medium">{user?.name}</td>
                                     <td className="px-4 py-3">{user?.email}</td>
                                     <td className="px-4 py-3 capitalize">{user?.role}</td>
