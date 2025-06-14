@@ -5,10 +5,7 @@ import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(request: NextRequest) {
     const email = request.nextUrl.pathname.split("/").pop();
-    if (!email) {
-        return NextResponse.json({ error: 'Email is required' }, { status: 400 });
-
-    }
+   
     const userCollection = await dbConnect(CollectionObjects.userCollection)
     try {
         const user = await userCollection.findOne({ email })
