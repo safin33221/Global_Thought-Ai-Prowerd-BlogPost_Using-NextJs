@@ -85,7 +85,7 @@ const DashboardAside = ({ onClose }: { onClose?: () => void }) => {
       </div>
       <div className="border my-5"></div>
       <div>
-        <div className="flex items-center justify-center mb-3">
+        <div className=" items-center hidden md:block justify-center mb-3">
           <ThemeToggle />
         </div>
         <div className="space-y-1">

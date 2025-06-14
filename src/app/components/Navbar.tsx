@@ -33,7 +33,7 @@ import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 import { useCurrentUserDetails } from "@/Hook/useCurrentUserDetails"
 import ThemeToggle from "../../components/ThemeToggle"
-
+import GlobalThought from "./GlobalThought"
 
 
 const components = [
@@ -87,9 +87,8 @@ export function NavigationMenuDemo() {
                 <button className=" md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                     {mobileMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
                 </button>
-                <h1 className="text-xl md:text-2xl  font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                    Global Thought
-                </h1>
+                <GlobalThought/>
+
                 {mobileMenuOpen && (
                     <div className="    absolute top-16 left-0 right-0  backdrop-blur-2xl   z-50 flex flex-col p-2 shadow-md space-y-4 md:hidden">
                         <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
