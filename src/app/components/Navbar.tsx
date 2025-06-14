@@ -38,7 +38,7 @@ import GlobalThought from "./GlobalThought"
 
 const components = [
     {
-        title: "AI Blog Generator",
+        title: "SEO Optimization    ",
         href: "/features/ai-blog-generator",
         description: "Create high-quality blog posts instantly using our powerful AI writing engine.",
     },
@@ -87,19 +87,22 @@ export function NavigationMenuDemo() {
                 <button className=" md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                     {mobileMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
                 </button>
-                <GlobalThought/>
+                <GlobalThought />
 
-                {mobileMenuOpen && (
-                    <div className="    absolute top-16 left-0 right-0  backdrop-blur-2xl   z-50 flex flex-col p-2 shadow-md space-y-4 md:hidden">
-                        <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-                        <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
-                        <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
-                        <Link href="/create" onClick={() => setMobileMenuOpen(false)}>Create</Link>
-                        <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>Dashboard</Link>
-                        <Link href="/login" onClick={() => setMobileMenuOpen(false)}>Login</Link>
-                        <Link href="/register" onClick={() => setMobileMenuOpen(false)}>Register</Link>
-                    </div>
-                )}
+                <div
+                    className={`
+          absolute top-16 left-0 right-0 bg-white dark:bg-card z-50 flex flex-col p-2 shadow-md space-y-4 md:hidden
+          transform transition-transform duration-300 ease-in-out origin-top
+          ${mobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-80 opacity-0 pointer-events-none"}
+        `}
+                >
+                    <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+                    <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
+                    <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
+                    <Link href="/features/ai-blog-generator" onClick={() => setMobileMenuOpen(false)}>AI Blog Generator</Link>
+                    <Link href="/features/seo-optimization  " onClick={() => setMobileMenuOpen(false)}>SEO Optimization</Link>
+
+                </div>
             </div>
 
 
@@ -248,23 +251,23 @@ export function NavigationMenuDemo() {
                                                 <Link href={'/profile'}> Profile</Link>
                                                 <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                                             </DropdownMenuItem>
-                                            <DropdownMenuItem>
+                                            {/* <DropdownMenuItem>
                                                 Billing
                                                 <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-                                            </DropdownMenuItem>
+                                            </DropdownMenuItem> */}
                                             <DropdownMenuItem>
-                                                <Link href={'/dashboard'}>
+                                                <Link href={'/dashboard/blog/myBlog'}>
                                                     Dashboard
                                                 </Link>
                                                 <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
                                             </DropdownMenuItem>
-                                            <DropdownMenuItem>
+                                            {/* <DropdownMenuItem>
                                                 Settings
                                                 <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-                                            </DropdownMenuItem>
+                                            </DropdownMenuItem> */}
                                         </DropdownMenuGroup>
                                         <DropdownMenuSeparator />
-                                        <DropdownMenuGroup>
+                                        {/* <DropdownMenuGroup>
                                             <DropdownMenuItem>Team</DropdownMenuItem>
                                             <DropdownMenuSub>
                                                 <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
@@ -281,11 +284,11 @@ export function NavigationMenuDemo() {
                                                 New Team
                                                 <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
                                             </DropdownMenuItem>
-                                        </DropdownMenuGroup>
-                                        <DropdownMenuSeparator />
-                                        <DropdownMenuItem>GitHub</DropdownMenuItem>
+                                        </DropdownMenuGroup> */}
+                                        {/* <DropdownMenuSeparator /> */}
+                                        {/* <DropdownMenuItem>GitHub</DropdownMenuItem> */}
                                         <DropdownMenuItem>Support</DropdownMenuItem>
-                                        <DropdownMenuItem disabled>API</DropdownMenuItem>
+                                        {/* <DropdownMenuItem disabled>API</DropdownMenuItem> */}
                                         <DropdownMenuSeparator />
                                         <DropdownMenuItem onClick={() => signOut()}>
                                             Log out
@@ -296,9 +299,9 @@ export function NavigationMenuDemo() {
 
                             </div>) : (
                             <div>
-                                <Link href="/login" className="text-sm font-medium text-blue-600 hover:underline">Login</Link>
+                                <Link href="/login" className="text-sm font-medium text-indigo-700 hover:underline">Login</Link>
                                 <span className="mx-2">|</span>
-                                <Link href="/register" className="text-sm font-medium text-blue-600 hover:underline">Register</Link>
+                                <Link href="/register" className="text-sm font-medium text-indigo-700 hover:underline">Register</Link>
                             </div>)
                     }
 
