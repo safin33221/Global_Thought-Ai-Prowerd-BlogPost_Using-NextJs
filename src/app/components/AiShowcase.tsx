@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Sparkles, BarChart, Lightbulb, TimerReset, PenTool } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+
 export default function AiShowcase() {
   const [showAI, setShowAI] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -17,13 +18,15 @@ export default function AiShowcase() {
   };
 
   return (
-    <section className="bg-background rounded-2xl p-8 mt-20 shadow-xl mx-auto">
+    <section className=" rounded-2xl p-8 mt-20 shadow-xl mx-auto">
       {/* Section Intro */}
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold flex justify-center items-center gap-2">
+
+      
+        <h2 className="lg:text-4xl font-bold text flex justify-center items-center gap-2">
           <Sparkles className="text-yellow-500" /> AI Blog Assistant Demo
         </h2>
-        <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
+        <p className="mt-2 text-lg text-muted-foreground max-w-2xl mx-auto">
           See how ThinkPost’s AI helps you generate summaries and SEO-friendly tags in seconds. Improve clarity, save time, and rank better — all while you write.
         </p>
       </div>

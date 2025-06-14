@@ -5,6 +5,7 @@ import React from 'react';
 import BlogPostHero from '../components/BlogPostHero';
 import FeatureBlog from '../components/FeatureBlog';
 import AiShowcase from '../components/AiShowcase';
+import DashboardPreviewSection from '../components/DashboardPreviewSection';
 
 
 
@@ -28,6 +29,7 @@ const page = () => {
       <div className='container'>
         <FeatureBlog />
         <AiShowcase />
+        <DashboardPreviewSection/>
 
       </div>
 
