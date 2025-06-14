@@ -117,9 +117,9 @@ export default function CreatePostPage() {
           </label>
           <div className="grid w-full p-2 items-center gap-3">
             <Label htmlFor="picture">Picture</Label>
-            <Input id="picture" type="file"
+            <Input id="picture" required type="file"
               onChange={handleFileChange} />
-            required
+           
           </div>
         </div>
 

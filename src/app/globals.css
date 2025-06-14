@@ -39,7 +39,7 @@
   --color-card: var(--card);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius); 
+  --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
 
@@ -130,6 +130,25 @@ html {
   min-height: 300px;
   outline: none;
 }
+
 .btn {
   @apply px-3 py-1 border rounded bg-gray-100 hover:bg-blue-500 hover:text-white transition;
+}
+
+
+@keyframes gradient-x {
+
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+
+  50% {
+    background-position: 100% center;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 4s ease infinite;
 }

@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌍 Global Thought — AI-Powered Blog Platform
 
-## Getting Started
+**Global Thought** is an AI-powered blog platform built using **Next.js**, **TypeScript**, **MongoDB**,**Tailwind CSS**, and **Shadcn UI**. It helps users generate, publish, and manage blog posts with the help of artificial intelligence. Designed for both content creators and admins, the platform supports seamless writing, user management, and content moderation.
 
-First, run the development server:
+---
+
+## 🚀 Live Site
+
+🔗 [https://global-thought.vercel.app/](https://global-thought.vercel.app/)
+
+---
+
+
+
+## 🔐 Test Credentials
+
+Use the following test credentials to log in and explore the platform:
+
+| Role  | Email            | Password |
+| ----- | ---------------- | -------- |
+| Admin | admin@gmail.com  | admin123 |
+| User  | user@example.com | user123  |
+
+---
+
+## 🧰 Tech Stack
+
+- **Framework**: Next.js  
+- **Language**: TypeScript  
+- **Styling**: Tailwind CSS  
+- **Database**: MongoDB
+- **Authentication**: NextAuth.js  
+- **AI Integration**: Gemini API  
+- **State Management**: TanStack Query  
+- **Rich Text Editor**: Tiptap  
+- **Hosting**: Vercel  
+
+---
+
+## ✨ Key Features
+
+- 🧠 AI blog content generation  
+- ✍️ Rich text editing with Tiptap  
+- 🧑‍💼 Role-based authentication (admin/user)  
+- 📄 Blog creation, editing, and modal preview  
+- 👥 User management panel (view, update, suspend)  
+- 🌗 Dark and light mode support  
+- 🔎 Search and filtering for content discovery  
+
+---
+
+## ⚙️ Getting Started (Development)
+
+## 📦 Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/safin33221/Global_Thought-Ai-Prowerd-BlogPost_Using-NextJs.git
+cd Global_Thought-Ai-Prowerd-BlogPost_Using-NextJs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Install Dependencies
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm install
+```
 
-## Learn More
+### 2. Configure Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.env` file at the root of the project and add the following:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+MONGODB_URI=your_postgresql_database_url
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+GEMINI_API_KEY=your_openai_api_key
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Run Development Server
 
-## Deploy on Vercel
+```bash
+pnpm dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Visit: [http://localhost:3000](http://localhost:3000)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+## 🙋‍♂️ Author
+
+Developed by **Safin Chowdhury**  
+Feel free to fork, contribute, or use this as a starter for your own AI blog platform!
+
+---
+
+## 📌 Optional: Database Setup & Deployment
+
+Let me know if you'd like to include additional instructions for:
+ 
+- Deployment on Vercel  
+- Production environment configuration
