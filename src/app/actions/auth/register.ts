@@ -30,7 +30,7 @@ const registerUser = async (payload: User) => {
         result.insertedId.toString();
         return result;
     }
-    
+
     return { acknowledged: false, message: "User already registered" };
 }
 

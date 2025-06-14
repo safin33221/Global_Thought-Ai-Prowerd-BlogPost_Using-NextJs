@@ -49,7 +49,7 @@ export default function BlogPostHero({
                 </p>
 
                 {/* Meta */}
-                {/* <div className="mt-6 flex items-center gap-3 text-sm text-slate-300">
+                 <div className="mt-6 flex items-center gap-3 text-sm text-slate-300">
                     <Image
                         src={author.avatar}
                         alt={author.name}
@@ -62,7 +62,7 @@ export default function BlogPostHero({
                     <time dateTime={publishedAt}>{publishedAt}</time>
                     <span className="opacity-50">•</span>
                     <span >{readTime}</span>
-                </div> */}
+                </div> 
 
                 {/* Tags */}
                 {tags.length > 0 && (
