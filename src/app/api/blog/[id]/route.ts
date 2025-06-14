@@ -4,9 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Get blog by ID
 export async function GET(req: NextRequest) {
-    // const id = req.url.split("/").pop(); // extract ID from URL
-    const url = new URL(req.url);
-    const id = url.searchParams.get("id")
+    const id = req.url.split("/").pop(); // extract ID from URL
+    // const url = new URL(req.url);
+    // const id = url.searchParams.get("id")
 
     if (!id || !ObjectId.isValid(id)) {
         return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
