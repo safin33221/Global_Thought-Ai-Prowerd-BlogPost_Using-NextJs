@@ -1,25 +1,24 @@
-"use client"
+
 
 
 import Loader from '@/app/components/Loader';
 import { BlogPost } from '@/types/types';
 import axios from 'axios';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
 
 
+interface PageProps {
+    params: {
+        id: string;
+    };
+}
 
 
-export default function Page({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = React.use(params);
-    const [blog, setBLog] = useState<BlogPost | null>(null)
-    useEffect(() => {
-        const getSinglePost = async () => {
-            const res = await axios.get(`/api/blog/${id}`)
-            setBLog(res?.data?.blog);
-        }
-        getSinglePost()
-    }, [id])
+const SingleBlog = async ({ params }: PageProps) => {
+    const { id } = params;
+
+    const res = await axios.get(`/api/blog/${id}`);
+    const blog: BlogPost = res.data.blog;
     if (!blog) return <Loader />
 
 
@@ -99,3 +98,4 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
     );
 };
 
+export default SingleBlog;
