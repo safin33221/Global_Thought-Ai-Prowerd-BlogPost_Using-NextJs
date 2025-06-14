@@ -1,4 +1,4 @@
-"use client"
+
 
 
 import Loader from '@/app/components/Loader';
@@ -7,12 +7,11 @@ import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
-type PageProps = {
-  params: { id: string }
-};
+type PageProps = { params: { id: string } };
 
-const SingleBlog = ({ params }: PageProps) => {
-    const id  = params.id;
+
+export default  function SingleBlog({ params }: PageProps) {
+    const id = params.id;
     const [blog, setBLog] = useState<BlogPost | null>(null)
     useEffect(() => {
         const getSinglePost = async () => {
@@ -100,4 +99,3 @@ const SingleBlog = ({ params }: PageProps) => {
     );
 };
 
-export default SingleBlog;
