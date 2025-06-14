@@ -32,7 +32,7 @@ const FeatureBlog = () => {
     if (!blogs) return <Loader />
     return (
         <div>
-            <section className="">
+            <section className=" ">
                 <SectionTitle title="🚀 Featured Blog Posts" subtitle="Highlighting the best reads of the week." />
                 <div className=" mx-auto px-4 text-center">
                     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
