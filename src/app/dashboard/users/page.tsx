@@ -1,0 +1,111 @@
+"use client"
+import { User } from '@/types/types';
+
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import React from 'react';
+
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { MoreVertical } from "lucide-react";
+import Loader from '@/app/components/Loader';
+
+const Users = () => {
+    const { data: users, isLoading } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axios.get('/api/users')
+            return res.data
+        }
+    })
+
+
+
+
+    const handleRoleChange = (id: string, newRole: User["role"]) => {
+
+    };
+
+    const handleToggleStatus = (id: string) => {
+
+    };
+    const handleDelete = (id: string) => {
+
+    };
+
+    if (isLoading) return <Loader />
+    return (
+        <div>
+            <div className="max-w-6xl mx-auto p-6  rounded-2xl">
+                <h2 className="text-2xl font-bold mb-6">User Management</h2>
+                <div className="overflow-x-auto">
+                    <table className="min-w-full text-sm border border-gray-200 rounded-lg overflow-hidden dark:bg-card">
+                        <thead className="bg-muted text-left">
+                            <tr>
+                                <th className="px-4 py-3">Name</th>
+                                <th className="px-4 py-3">Email</th>
+                                <th className="px-4 py-3">Role</th>
+                                {/* <th className="px-4 py-3">Status</th> */}
+                                <th className="px-4 py-3 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users?.map((user) => (
+                                <tr key={user?.id} className="border-t hover:bg-secondary">
+                                    <td className="px-4 py-3 font-medium">{user?.name}</td>
+                                    <td className="px-4 py-3">{user?.email}</td>
+                                    <td className="px-4 py-3 capitalize">{user?.role}</td>
+                                    {/* <td className={`px-4 py-3 capitalize ${user?.status === "active" ? "text-green-600" : "text-red-600"}`}>
+                                        {user?.status}
+                                    </td> */}
+                                    <td className="px-4 py-3 text-center">
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button variant="ghost" size="icon">
+                                                    <MoreVertical className="w-4 h-4" />
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end">
+                                                {
+                                                    user?.role === 'USER' ? (
+                                                        <DropdownMenuItem onClick={() => handleRoleChange(user?.id, "ADMIN")}>
+                                                            Make Admin
+                                                        </DropdownMenuItem>
+                                                    ) : (
+                                                        <DropdownMenuItem onClick={() => handleRoleChange(user?.id, "USER")}>
+                                                            Make User
+                                                        </DropdownMenuItem>
+                                                    )
+                                                }
+
+
+                                                {/* <DropdownMenuItem onClick={() => handleRoleChange(user?.id, "viewer")}>
+                                                    Make Viewer
+                                                </DropdownMenuItem> */}
+                                                {/* <DropdownMenuItem onClick={() => handleToggleStatus(user?.id)}>
+                                                    {user?.status === "active" ? "Suspend User" : "Activate User"}
+                                                </DropdownMenuItem> */}
+                                                <DropdownMenuItem onClick={() => handleDelete(user.id)} className="text-red-600">
+                                                    Delete User
+                                                </DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    </td>
+                                </tr>
+                            ))}
+                            {users?.length === 0 && (
+                                <tr>
+                                    <td colSpan={5} className="text-center text-muted-foreground py-6">
+                                        No users found.
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Users;
