@@ -3,17 +3,17 @@
 import { useState } from 'react';
 import { useCurrentUserDetails } from '@/Hook/useCurrentUserDetails';
 import DashboardAside from './components/DashboardAside';
-import Loader from '../components/Loader';
 import { Menu } from 'lucide-react';
 import clsx from 'clsx';
 import GlobalThought from '../components/GlobalThought';
 import ThemeToggle from '@/components/ThemeToggle';
+import DashboardAsideSkeleton from './components/DashboardAsideSkeleton';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const { isLoading } = useCurrentUserDetails();
+  const {  isPending } = useCurrentUserDetails();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  if (isLoading) return <Loader />;
+
 
   return (
     <div className="flex h-screen overflow-hidden relative">
@@ -36,7 +36,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             ❌
           </button>
         </div>
-        <DashboardAside onClose={() => setIsSidebarOpen(false)} />
+        {
+          isPending ? (
+            <DashboardAsideSkeleton />
+          ) : (
+            <DashboardAside onClose={() => setIsSidebarOpen(false)} />
+          )
+        }
       </div>
 
       {/* Overlay */}
@@ -59,7 +65,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               >
                 <Menu className="w-6 h-6" />
               </button>
-              <ThemeToggle/>
+              <ThemeToggle />
             </div>
             <GlobalThought />
           </div>

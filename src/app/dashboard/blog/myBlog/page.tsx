@@ -38,7 +38,11 @@ const MyBlog = () => {
 
   return (
     <div className="py-8 px-4 max-w-7xl mx-auto">
-      {blogs.length != 0  ? (
+      {blogs.length === 0 && !isPending ? (
+        <div className="text-center flex items-center justify-center   text-2xl font-bold mt-20">
+          You haven’t written any blog posts yet.
+        </div>
+      ) : (
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {isPending ? (
             Array.from({ length: 6 }).map((_, idx) => (
@@ -52,11 +56,6 @@ const MyBlog = () => {
 
 
 
-        </div>
-      ) : (
-
-        <div className="text-center flex items-center justify-center   text-2xl font-bold mt-20">
-          You haven’t written any blog posts yet.
         </div>
       )}
     </div>
