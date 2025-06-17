@@ -5,19 +5,18 @@ import BlogCard from "./BlogCard";
 
 
 
-import React, { useEffect, useState } from 'react';
+
 import SectionTitle from "./SectionTitle";
 import axios from "axios";
 import { BlogPost } from "@/types/types";
-import Loader from "./Loader";
-import toast from "react-hot-toast";
+
 import { useQuery } from "@tanstack/react-query";
 import BlogCardSkeleton from "./Skeleton/BlogCardSkeleton";
 
 const FeatureBlog = () => {
 
 
-    const { data: blogs = [], isPending, isError, error } = useQuery<BlogPost[]>({
+    const { data: blogs = [], isPending } = useQuery<BlogPost[]>({
         queryKey: ['blogs'],
         queryFn: async () => {
             const res = await axios.get('/api/blog')

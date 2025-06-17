@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 export function useCurrentUserDetails() {
     const { data: session } = useSession();
 
-    const { data: userDetails = null, isLoading, refetch } = useQuery<User>({
+    const { data: userDetails = null, isLoading, refetch, isPending } = useQuery<User>({
         queryKey: ['user', session?.user?.email],
         enabled: !!session?.user?.email,
         queryFn: async () => {
@@ -26,6 +26,7 @@ export function useCurrentUserDetails() {
     return {
         userDetails,
         isLoading,
-        refetch
+        refetch,
+        isPending
     };
 }

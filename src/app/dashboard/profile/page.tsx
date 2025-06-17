@@ -47,7 +47,7 @@ const ProfilePage = () => {
 
     return (
         <div className="min-h-fit mt-20 flex items-center justify-center p-4">
-            <div className="w-full max-w-3xl bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-2xl shadow-xl p-6 relative transition-all duration-300">
+            <div className="w-full max-w-3xl bg-white dark:bg-card dark:text-gray-100 rounded-2xl shadow-xl p-6 relative transition-all duration-300">
 
                 {/* Profile Header */}
                 <div className="flex items-center gap-4 mb-6">

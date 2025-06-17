@@ -82,7 +82,7 @@ export function NavigationMenuDemo() {
 
 
     return (
-        <div className="container mx-auto px-4 py-2 flex items-center justify-between">
+        <div className=" mx-auto px-4 py-2 flex items-center justify-between bg-background ">
             <div className="flex gap-2 items-center">
                 <button className=" md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                     {mobileMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
