@@ -15,7 +15,7 @@ const BlogCard = ({ title, content, author, cover, createdAt, _id }: BlogPost) =
                     alt={title}
                     width={600}
                     height={400}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-64 bg-cover object-center"
                 />
             )}
             <div className="p-4">
