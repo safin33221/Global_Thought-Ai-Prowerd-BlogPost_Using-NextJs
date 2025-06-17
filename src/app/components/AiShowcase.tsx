@@ -18,7 +18,7 @@ export default function AiShowcase() {
   };
 
   return (
-    <section className="max-w-7xl rounded-2xl p-8 mt-20 shadow-xl mx-auto">
+    <section className="max-w-7xl rounded-2xl p-8 mt-20 shadow-xl mx-auto ">
       {/* Section Intro */}
       <div className="text-center mb-10">
 
@@ -60,7 +60,7 @@ export default function AiShowcase() {
       </div>
 
       {/* CTA Button */}
-      <div className="text-center mt-6">
+      <div className="text-center my-6">
         <Button
           className="bg-gradient-to-r from-blue-600 to-purple-600 text-white"
           onClick={handleGenerate}
