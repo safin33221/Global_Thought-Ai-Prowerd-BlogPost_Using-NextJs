@@ -87,7 +87,7 @@ const MainToolbarContent = ({
   isMobile: boolean
 }) => {
   return (
-    <>
+    < >
       <Spacer />
 
       <ToolbarGroup>
@@ -160,7 +160,7 @@ const MobileToolbarContent = ({
   type: "highlighter" | "link"
   onBack: () => void
 }) => (
-  <>
+  <div >
     <ToolbarGroup>
       <Button data-style="ghost" onClick={onBack}>
         <ArrowLeftIcon className="tiptap-button-icon" />
@@ -179,7 +179,7 @@ const MobileToolbarContent = ({
     ) : (
       <LinkContent />
     )}
-  </>
+  </div>
 )
 
 export function SimpleEditor() {
@@ -240,7 +240,8 @@ export function SimpleEditor() {
   return (
     <EditorContext.Provider value={{ editor }}>
       <Toolbar
-      
+      className=""
+        
         ref={toolbarRef}
         style={
           isMobile
@@ -252,9 +253,11 @@ export function SimpleEditor() {
       >
         {mobileView === "main" ? (
           <MainToolbarContent
+          
             onHighlighterClick={() => setMobileView("highlighter")}
             onLinkClick={() => setMobileView("link")}
             isMobile={isMobile}
+          
           />
         ) : (
           <MobileToolbarContent
@@ -264,7 +267,7 @@ export function SimpleEditor() {
         )}
       </Toolbar>
 
-      <div className="content-wrapper overflow-x-scroll">
+      <div className="content-wrapper overflow-y-scroll">
         <EditorContent
           editor={editor}
           role="presentation"
