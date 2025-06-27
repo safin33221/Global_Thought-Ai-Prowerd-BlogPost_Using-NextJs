@@ -88,6 +88,7 @@ const MainToolbarContent = ({
 }) => {
   return (
     < >
+
       <Spacer />
 
       <ToolbarGroup>
@@ -239,25 +240,67 @@ export function SimpleEditor() {
 
   return (
     <EditorContext.Provider value={{ editor }}>
-      <Toolbar
-      className=""
-        
-        ref={toolbarRef}
-        style={
-          isMobile
-            ? {
-              bottom: `calc(100% - ${windowSize.height - bodyRect.y}px)`,
-            }
-            : {}
+<Toolbar
+  ref={toolbarRef}
+  className={`fixed left-0 w-full z-50 flex items-center justify-center bg-card backdrop-blur-2xl transition-all duration-300 ${
+    isMobile ? 'px-4 py-2' : ''
+  }`}
+  style={
+    isMobile
+      ? {
+          bottom: `${window.innerHeight - (windowSize.height - bodyRect.y)}px`,
         }
-      >
+      : {}
+  }
+>
+
+
+        <div className="flex items-center gap-5 justify-end py-5 ">
+          <button
+            onClick={async () => {
+              const content = editor?.getJSON()
+              // if (!content) return
+              // const res = await fetch("/api/save-editor", {
+              //   method: "POST",
+              //   headers: {
+              //     "Content-Type": "application/json",
+              //   },
+              //   body: JSON.stringify({ content }),
+              // })
+              // const data = await res.json()
+              console.log("Saved:", content)
+            }}
+            className="mt-4 bg-indigo-600 text-white  rounded-full shadow-lg px-3 py-1 "
+          >
+            Save
+          </button>
+          <button
+            onClick={async () => {
+              const content = editor?.getJSON()
+              // if (!content) return
+              // const res = await fetch("/api/save-editor", {
+              //   method: "POST",
+              //   headers: {
+              //     "Content-Type": "application/json",
+              //   },
+              //   body: JSON.stringify({ content }),
+              // })
+              // const data = await res.json()
+              console.log("Saved:", content)
+            }}
+            className="mt-4 bg-indigo-600 text-white  rounded-full shadow-lg px-3 py-1  "
+          >
+            Save as Draft
+          </button>
+
+        </div>
         {mobileView === "main" ? (
           <MainToolbarContent
-          
+
             onHighlighterClick={() => setMobileView("highlighter")}
             onLinkClick={() => setMobileView("link")}
             isMobile={isMobile}
-          
+
           />
         ) : (
           <MobileToolbarContent
@@ -267,31 +310,14 @@ export function SimpleEditor() {
         )}
       </Toolbar>
 
-      <div className="content-wrapper overflow-y-scroll">
+      <div className="content-wrapper  mx-4 overflow-y-scroll">
         <EditorContent
           editor={editor}
           role="presentation"
-          className="simple-editor-content  bg-card"
+          className="simple-editor-content    bg-card"
         />
-        <button
-          onClick={async () => {
-            const content = editor?.getJSON()
-            // if (!content) return
-            // const res = await fetch("/api/save-editor", {
-            //   method: "POST",
-            //   headers: {
-            //     "Content-Type": "application/json",
-            //   },
-            //   body: JSON.stringify({ content }),
-            // })
-            // const data = await res.json()
-            console.log("Saved:", content)
-          }}
-          className="mt-4 bg-indigo-600 text-white  rounded-full shadow-lg px-5 py-3 w-full"
-        >
-          Save
-        </button>
+
       </div>
-    </EditorContext.Provider>
+    </EditorContext.Provider >
   )
 }

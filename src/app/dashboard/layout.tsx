@@ -57,8 +57,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="flex-1 w-full ">
         {/* Topbar with mobile menu button */}
         <div className="p-4 md:hidden bg-card  shadow">
-          <div className='flex justify-between'>
-            <div className='flex items-center'>
+          <div className='flex justify-between items-center'>
+            <div className='flex items-center '>
               <button
                 onClick={() => setIsSidebarOpen(true)}
                 className="text-gray-700 focus:outline-none"
@@ -71,7 +71,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        <main className="p-4 overflow-y-auto h-[calc(100vh-64px)] md:h-screen mx-auto">
+        <main className=" overflow-y-auto h-[calc(100vh-64px)] md:h-screen mx-auto">
           {children}
         </main>
       </div>
