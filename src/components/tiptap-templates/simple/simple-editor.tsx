@@ -223,7 +223,7 @@ export function SimpleEditor() {
       TrailingNode,
       Link.configure({ openOnClick: false }),
     ],
-    // content: content,
+    content: content,
   })
 
   const bodyRect = useCursorVisibility({
@@ -240,6 +240,7 @@ export function SimpleEditor() {
   return (
     <EditorContext.Provider value={{ editor }}>
       <Toolbar
+      
         ref={toolbarRef}
         style={
           isMobile
@@ -263,13 +264,13 @@ export function SimpleEditor() {
         )}
       </Toolbar>
 
-      <div className="content-wrapper">
+      <div className="content-wrapper overflow-x-scroll">
         <EditorContent
           editor={editor}
           role="presentation"
-          className="simple-editor-content"
+          className="simple-editor-content  bg-card"
         />
-        <Button
+        <button
           onClick={async () => {
             const content = editor?.getJSON()
             // if (!content) return
@@ -283,10 +284,10 @@ export function SimpleEditor() {
             // const data = await res.json()
             console.log("Saved:", content)
           }}
-          className="mt-4"
+          className="mt-4 bg-indigo-600 text-white  rounded-full shadow-lg px-5 py-3 w-full"
         >
           Save
-        </Button>
+        </button>
       </div>
     </EditorContext.Provider>
   )

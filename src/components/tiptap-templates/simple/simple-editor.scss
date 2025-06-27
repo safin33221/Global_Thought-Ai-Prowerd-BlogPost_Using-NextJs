@@ -16,6 +16,7 @@ body {
   font-weight: 400;
   font-style: normal;
   padding: 0;
+  user-select: text;
 }
 
 html,
@@ -32,13 +33,22 @@ body {
 
 .tiptap.ProseMirror {
   font-family: "DM Sans", sans-serif;
+  user-select: text;
 }
 
 .content-wrapper {
   height: calc(100% - var(--tt-toolbar-height));
   overflow-y: scroll;
+  user-select: text;
 
 
+  /* Global highlight style */
+  ::selection {
+    background-color: rgba(29, 9, 255, 0.427);
+    /* greenish highlight */
+    color: rgb(0, 0, 0);
+    
+  }
 
 
   &::-webkit-scrollbar {
@@ -61,10 +71,12 @@ body {
 }
 
 .simple-editor-content {
-  max-width: 640px;
+
   width: 100%;
   margin: 0 auto;
+  user-select: text;
 }
+
 
 .simple-editor-content .tiptap.ProseMirror {
   padding: 3rem 3rem;
