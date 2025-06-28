@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import axios from "axios"
 import { EditorContent, EditorContext, useEditor } from "@tiptap/react"
 
 // --- Tiptap Core Extensions ---
@@ -66,9 +67,6 @@ import { useMobile } from "@/hooks/use-mobile"
 import { useWindowSize } from "@/hooks/use-window-size"
 import { useCursorVisibility } from "@/hooks/use-cursor-visibility"
 
-// --- Components ---
-// import { ThemeToggle } from "@/components/tiptap-templates/simple/theme-toggle"
-
 // --- Lib ---
 import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils"
 
@@ -87,8 +85,7 @@ const MainToolbarContent = ({
   isMobile: boolean
 }) => {
   return (
-    < >
-
+    <>
       <Spacer />
 
       <ToolbarGroup>
@@ -146,10 +143,6 @@ const MainToolbarContent = ({
       <Spacer />
 
       {isMobile && <ToolbarSeparator />}
-
-      {/* <ToolbarGroup>
-        <ThemeToggle />
-      </ToolbarGroup> */}
     </>
   )
 }
@@ -161,7 +154,7 @@ const MobileToolbarContent = ({
   type: "highlighter" | "link"
   onBack: () => void
 }) => (
-  <div >
+  <div>
     <ToolbarGroup>
       <Button data-style="ghost" onClick={onBack}>
         <ArrowLeftIcon className="tiptap-button-icon" />
@@ -186,9 +179,9 @@ const MobileToolbarContent = ({
 export function SimpleEditor() {
   const isMobile = useMobile()
   const windowSize = useWindowSize()
-  const [mobileView, setMobileView] = React.useState<
-    "main" | "highlighter" | "link"
-  >("main")
+  const [mobileView, setMobileView] = React.useState<"main" | "highlighter" | "link">(
+    "main"
+  )
   const toolbarRef = React.useRef<HTMLDivElement>(null)
 
   const editor = useEditor({
@@ -238,69 +231,57 @@ export function SimpleEditor() {
     }
   }, [isMobile, mobileView])
 
+  // Save function with draft flag
+  const saveContent = async (isDraft: boolean) => {
+    if (!editor) return
+    const content = editor.getJSON()
+    console.log(content);
+    try {
+      const res = await axios.post("/api/blog/save-editor", {
+        content,
+        isDraft,
+      })
+      console.log(isDraft ? "Draft saved:" : "Saved:", res.data)
+    } catch (error) {
+      console.error("Save failed:", error)
+    }
+  }
+
   return (
     <EditorContext.Provider value={{ editor }}>
-<Toolbar
-  ref={toolbarRef}
-  className={`fixed left-0 w-full z-50 flex items-center justify-center bg-card backdrop-blur-2xl transition-all duration-300 ${
-    isMobile ? 'px-4 py-2' : ''
-  }`}
-  style={
-    isMobile
-      ? {
-          bottom: `${window.innerHeight - (windowSize.height - bodyRect.y)}px`,
+      <Toolbar
+        ref={toolbarRef}
+        className={`fixed left-0 w-full z-50 flex items-center justify-center bg-card backdrop-blur-2xl transition-all duration-300 ${
+          isMobile ? "px-4 py-2" : ""
+        }`}
+        style={
+          isMobile
+            ? {
+                bottom: `${window.innerHeight - (windowSize.height - bodyRect.y)}px`,
+              }
+            : {}
         }
-      : {}
-  }
->
-
-
-        <div className="flex items-center gap-5 justify-end py-5 ">
+      >
+        <div className="flex items-center gap-5 justify-end py-5 px-8">
           <button
-            onClick={async () => {
-              const content = editor?.getJSON()
-              // if (!content) return
-              // const res = await fetch("/api/save-editor", {
-              //   method: "POST",
-              //   headers: {
-              //     "Content-Type": "application/json",
-              //   },
-              //   body: JSON.stringify({ content }),
-              // })
-              // const data = await res.json()
-              console.log("Saved:", content)
-            }}
-            className="mt-4 bg-indigo-600 text-white  rounded-full shadow-lg px-3 py-1 "
+            onClick={() => saveContent(false)}
+            className="mt-4 bg-indigo-600 text-white rounded-full shadow-lg px-3 py-1"
           >
-            Save
+            Publish
           </button>
           <button
-            onClick={async () => {
-              const content = editor?.getJSON()
-              // if (!content) return
-              // const res = await fetch("/api/save-editor", {
-              //   method: "POST",
-              //   headers: {
-              //     "Content-Type": "application/json",
-              //   },
-              //   body: JSON.stringify({ content }),
-              // })
-              // const data = await res.json()
-              console.log("Saved:", content)
-            }}
-            className="mt-4 bg-indigo-600 text-white  rounded-full shadow-lg px-3 py-1  "
+            onClick={() => saveContent(true)}
+            className="mt-4 bg-indigo-600 text-white rounded-full shadow-lg px-3 py-1"
           >
             Save as Draft
           </button>
-
         </div>
+
         {mobileView === "main" ? (
           <MainToolbarContent
-
             onHighlighterClick={() => setMobileView("highlighter")}
             onLinkClick={() => setMobileView("link")}
             isMobile={isMobile}
-
           />
         ) : (
           <MobileToolbarContent
@@ -310,14 +291,13 @@ export function SimpleEditor() {
         )}
       </Toolbar>
 
-      <div className="content-wrapper  mx-4 overflow-y-scroll">
+      <div className="content-wrapper mx-4 overflow-y-scroll">
         <EditorContent
           editor={editor}
           role="presentation"
-          className="simple-editor-content    bg-card"
+          className="simple-editor-content bg-card"
         />
-
       </div>
-    </EditorContext.Provider >
+    </EditorContext.Provider>
   )
 }
